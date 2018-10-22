@@ -1,0 +1,1 @@
+alert("Hintergrundfarbe: "+$('body').css('background-color'));

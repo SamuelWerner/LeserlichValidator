@@ -1,4 +1,7 @@
 extends layout
 
 block content
-  html= content
+  h1 Leserator
+  form(method='POST' action='/readWebsite')
+      input#name.form-control(type='text' name='url')
+      button.btn.btn-primary(type='submit') OK

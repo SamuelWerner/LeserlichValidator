@@ -1,1 +1,4 @@
-alert("Hintergrundfarbe: "+$('body').css('background-color'));
+$( document ).ready(function() {
+    console.log("Hintergrundfarbe: "+$('body').css('background-color'));
+});
+

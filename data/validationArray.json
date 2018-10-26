@@ -1,0 +1,99 @@
+{
+    "Farben": {
+        "titel": "Farben",
+        "inhalt":
+            {
+                "Rotgruen": {
+                    "titel": "Rot-Grün-Kombinationen",
+                    "beschreibung": "Rot-Grün-Kombinationen vermeiden",
+                    "ergebnis": ""
+                },
+                "Unterscheidung": {
+                    "titel": "Zusätzliches Unterscheidungsmerkmal",
+                    "beschreibung": "Zusätzlich zur Farbe ein weiteres Unterscheidungsmerkmal verwenden.",
+                    "ergebnis": ""
+                },
+                "Sparsam": {
+                    "titel": "Farben sparsam einsetzen",
+                    "beschreibung": "Farben sparsam einsetzen und klar voneinander abgrenzen",
+                    "ergebnis": ""
+                },
+                "Komplementaer": {
+                    "titel": "Komplementärfarben",
+                    "beschreibung": "Kontraste von Komplementärfarben vermeiden",
+                    "ergebnis": ""
+                },
+                "Semantisch": {
+                    "titel": "Semantische Farbkonventionen",
+                    "beschreibung": "Das Beachten einer einheitlichen Verwendung bestimmter Farben.",
+                    "ergebnis": ""
+                }
+            }
+    },
+    "Kontrast":
+        {
+            "titel": "Kontrast",
+            "inhalt":
+
+                {
+                    "Hintergrund": {
+                        "titel": "Hintergrund",
+                        "beschreibung": "Der Kontrast zwischen Text und dem darunter liegenden Hintergrund. ",
+                        "ergebnis": ""
+                    },
+                    "Ebenen": {
+                        "titel": "Ebenen",
+                        "beschreibung": "Der Kontrast zwischen zwei Ebenen, die aufeinander liegen.",
+                        "ergebnis": ""
+                    },
+                    "Bild": {
+                        "titel": "Bild",
+                        "beschreibung": "Der Kontrast innerhalb eines Bildes. Wie stark hebt sich die wichtige Information vom Hintergrund ab? ",
+                        "ergebnis": ""
+                    },
+                    "BildHintergrund": {
+                        "titel": "Bild Hintergrund",
+                        "beschreibung": "Den Kontrast von Text auf Bild als Untergrund bewerten. Je unruhiger das Bild desto ungeeigneter als Hintergrund.  ",
+                        "ergebnis": ""
+                    }
+                }
+        },
+    "Schrift":
+        {
+            "titel": "Schrift",
+            "inhalt":
+
+                {
+                    "HumanistischeGroteskschriften": {
+                        "titel": "<small class='text-muted'>Zeichen/Schriftart/</small>Humanistische Groteskschriften",
+                        "beschreibung": "Humanistische Groteskschriften (auch als dynamische Sans Serif oder serifenlose Renaissance-Antiqua bezeichnet) werden für Leser mit Sehbehinderungen für alle Textarten empfohlen.",
+                        "ergebnis": ""
+                    },
+                    "KlassizistischeGroteskschriften": {
+                        "titel": "<small class='text-muted'>Zeichen/Schriftart/</small>Klassizistische Groteskschriften",
+                        "beschreibung": "Klassizistische Groteskschriften wie z. B. Arial oder Helvetica sind aufgrund ihrer geschlosseneren Buchstabenformen weniger geeignet als humanistische Groteskschriften.",
+                        "ergebnis": ""
+                    },
+                    "Serifenschriften ": {
+                        "titel": "<small class='text-muted'>Zeichen/Schriftart/</small>Serifenschriften",
+                        "beschreibung": "Bei Verwendung von Serifenschriften sind Schriften, die dem dynamischen Formprinzip folgen (Renaissance-Antiqua), zu bevorzugen.",
+                        "ergebnis": ""
+                    },
+                    "KlassizistischeAntiquaschriften ": {
+                        "titel": "<small class='text-muted'>Zeichen/Schriftart/</small>Klassizistische Antiquaschriften ",
+                        "beschreibung": "Klassizistische Antiquaschriften sind aufgrund ihrer feinen Haarstriche nicht geeignet.Serifen sollen sich nicht berühren.",
+                        "ergebnis": ""
+                    },
+                    "Ligaturen": {
+                        "titel": "<small class='text-muted'>Zeichen/Schriftart/</small>Ligaturen",
+                        "beschreibung": "Ligaturen (Verbindung von zwei Buchstaben in einem Zeichen) erschweren in manchen Fällen die Erkennbarkeit einzelner Zeichen und sollen daher mit Bedacht gesetzt werden.",
+                        "ergebnis": ""
+                    },
+                    "Ligaturen": {
+                        "titel": "<small class='text-muted'>Zeichen/Schriftart/</small>Ligaturen",
+                        "beschreibung": "Ligaturen (Verbindung von zwei Buchstaben in einem Zeichen) erschweren in manchen Fällen die Erkennbarkeit einzelner Zeichen und sollen daher mit Bedacht gesetzt werden.",
+                        "ergebnis": ""
+                  }
+                }
+        }
+}

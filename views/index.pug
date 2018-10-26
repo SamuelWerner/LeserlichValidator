@@ -1,7 +1,11 @@
-extends layout
+doctype html
+html
+    head
+        title= title
+    body
+        h1 Leserator
+        form(method='POST' action='/validateWebsite')
+            input#name.form-control(type='text' name='url')
+            button.btn.btn-primary(type='submit') OK
 
-block content
-  h1 Leserator
-  form(method='POST' action='/readWebsite')
-      input#name.form-control(type='text' name='url')
-      button.btn.btn-primary(type='submit') OK
+

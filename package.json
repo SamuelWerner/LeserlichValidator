@@ -12,8 +12,11 @@
     "express": "~4.16.0",
     "express-session": "^1.15.6",
     "http-errors": "~1.6.2",
+    "jquery": "^3.3.1",
+    "jsdom": "^12.2.0",
     "morgan": "~1.9.0",
     "phantom": "^6.0.3",
-    "pug": "2.0.0-beta11"
+    "pug": "2.0.0-beta11",
+    "window": "^4.2.5"
   }
 }

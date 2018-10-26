@@ -8,7 +8,8 @@ head
 
 body(style='padding-top:56px').bg-light
     nav.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-dark
-        a(href='#').navbar-brand.mr-auto.mr-lg-0 Leserator - Auswertung #{url}
+        a(href='/').navbar-brand.mr-auto.mr-lg-0 Leserator - Auswertung
+            b &nbsp;#{url}
         div.navbar-collapse.offcanvas-collapse
             ul.navbar-nav.mr-auto
             form(method='POST' action='/validateWebsite').form-inline.my-2.my-lg-0

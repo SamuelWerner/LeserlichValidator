@@ -4,11 +4,12 @@ const fs = require("fs");
 const jsdom = require("jsdom");
 const cheerio = require('cheerio');
 const phantom = require('phantom');
-const validateHumanistischeGroteskschriften = require('../validate/Schrift/Zeichen/Schriftart/humanistischeGroteskschriften');
 
 const router = express.Router();
 const jsonDataPath = 'data/validationArray.json';
-const jsonDataStructure = JSON.parse(fs.readFileSync(jsonDataPath));
+var jsonDataStructure = JSON.parse(fs.readFileSync(jsonDataPath));
+
+const validateAll= require('../validate/validateAll');
 
 
 const { JSDOM } = jsdom;
@@ -27,15 +28,11 @@ router.post('/', function(req, res) {
         const content = await page.property('content');
         await instance.exit();
         var dom = new JSDOM(cheerio.load(content).html());
-        validateAll(dom);
+        jsonDataStructure = validateAll.validateAll(dom, jsonDataStructure);
         res.render('ergebnis', {results: jsonDataStructure, url: url.substring(7) });
 
     })();
 });
-
-function validateAll(dom){
-    jsonDataStructure['Schrift']['inhalt']['HumanistischeGroteskschriften']['ergebnis']=validateHumanistischeGroteskschriften.validate(dom);
-}
 
 function addHttp(url) {
     result = url;

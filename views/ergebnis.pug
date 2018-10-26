@@ -8,7 +8,7 @@ head
 
 body(style='padding-top:56px').bg-light
     nav.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-dark
-        a(href='#').navbar-brand.mr-auto.mr-lg-0 Leserator
+        a(href='#').navbar-brand.mr-auto.mr-lg-0 Leserator - Auswertung #{url}
         div.navbar-collapse.offcanvas-collapse
             ul.navbar-nav.mr-auto
             form(method='POST' action='/validateWebsite').form-inline.my-2.my-lg-0
@@ -17,8 +17,6 @@ body(style='padding-top:56px').bg-light
 
     main.container
         div.my-3.p-3.bg-white.rounded.shadow-sm
-            h1 Auswertung
-            hr
             each kategorie in results
                 h2.display-2 #{kategorie.titel}
                 each schritt in kategorie.inhalt

@@ -88,12 +88,7 @@
                         "titel": "<small class='text-muted'>Zeichen/Schriftart/</small>Ligaturen",
                         "beschreibung": "Ligaturen (Verbindung von zwei Buchstaben in einem Zeichen) erschweren in manchen Fällen die Erkennbarkeit einzelner Zeichen und sollen daher mit Bedacht gesetzt werden.",
                         "ergebnis": ""
-                    },
-                    "Ligaturen": {
-                        "titel": "<small class='text-muted'>Zeichen/Schriftart/</small>Ligaturen",
-                        "beschreibung": "Ligaturen (Verbindung von zwei Buchstaben in einem Zeichen) erschweren in manchen Fällen die Erkennbarkeit einzelner Zeichen und sollen daher mit Bedacht gesetzt werden.",
-                        "ergebnis": ""
-                  }
+                    }
                 }
         }
 }

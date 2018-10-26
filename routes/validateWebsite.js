@@ -28,7 +28,7 @@ router.post('/', function(req, res) {
         await instance.exit();
         var dom = new JSDOM(cheerio.load(content).html());
         validateAll(dom);
-        res.render('ergebnis', {results: jsonDataStructure });
+        res.render('ergebnis', {results: jsonDataStructure, url: url.substring(7) });
 
     })();
 });

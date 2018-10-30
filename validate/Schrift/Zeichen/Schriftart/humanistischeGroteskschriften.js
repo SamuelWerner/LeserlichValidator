@@ -21,7 +21,7 @@ function fonts (dom) {
         for (let pseudo of ['', ':before', ':after']) {
 
             let fontFamily = dom.window.getComputedStyle(node, pseudo).fontFamily +"";
-            console.log(fontFamily)
+
 
             if (fontFamily && fontFamily !== ""){
                 if (!fontFamily.includes("sans-serif") && !fontFamily.includes("inherit")){

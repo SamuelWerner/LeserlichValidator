@@ -10,7 +10,7 @@ var cheerio = require('cheerio');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('index', { title: 'Leserator'});
+    res.render('index', { title: 'Leserator.de'});
 });
 
 module.exports = router;

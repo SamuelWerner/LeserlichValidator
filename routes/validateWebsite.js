@@ -29,9 +29,12 @@ router.post('/', function(req, res) {
         await instance.exit();
         var dom = new JSDOM(cheerio.load(content).html());
         jsonDataStructure = validateAll.validateAll(dom, jsonDataStructure);
-        res.render('ergebnis', {results: jsonDataStructure, url: url.substring(7) });
-
+        //res.render('ergebnis', {results: jsonDataStructure, url: url.substring(7) });
+        session.validationResult = jsonDataStructure;
+        session.validationURL = url.substring(7);
+        session.validationDone = true;
     })();
+    res.render('waiting' );
 });
 
 function addHttp(url) {

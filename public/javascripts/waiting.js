@@ -1,6 +1,6 @@
-checkUpdates();
+checkResult();
 
-function checkUpdates(){
+function checkResult(){
     setTimeout (function () {
         $.ajax({
             url: "/checkResult",
@@ -8,10 +8,10 @@ function checkUpdates(){
         }).done(function(result) {
             if (result !== 'waiting'){
                 document.write(result);
+            } else {
+                checkResult();
             }
-
         });
-        checkUpdates();
-    }, 3000);
+    }, 4000);
 }
 

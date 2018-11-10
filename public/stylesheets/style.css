@@ -1,0 +1,49 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #263238;
+    line-height: 100%;
+}
+footer ul{
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding-right: 0.6em;
+    margin: auto;
+}
+footer ul li{
+    display: inline;
+    padding:0em 0.6em 0em 0.6em;
+    line-height: 3em;
+}
+footer ul li a{
+    color: #d1d1d1;
+}
+footer ul li a:hover{
+    color:#ffffff;
+}
+footer ul li a:active{
+    color:#ffffff;
+}
+
+.wrapper{
+    text-align: center;
+    width: 40%;
+    margin: auto;
+    top: 35%;
+    position: relative;
+}
+
+
+h1{text-align: center;}
+button{
+    margin: 5px auto;
+    display: block;
+}

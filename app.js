@@ -8,6 +8,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var validateWebsite = require('./routes/validateWebsite');
 var waiting = require('./routes/waiting');
+var about = require('./routes/about');
+var handbuch = require('./routes/handbuch');
+var impressum = require('./routes/impressum');
 var checkResult = require('./routes/checkResult');
 
 var app = express();
@@ -26,6 +29,9 @@ app.use('/css',express.static(path.join(__dirname, '/public/stylesheets')));
 app.use('/', indexRouter);
 app.use('/validateWebsite', validateWebsite);
 app.use('/waiting', waiting);
+app.use('/about', about);
+app.use('/handbuch', handbuch);
+app.use('/impressum', impressum);
 app.use('/checkResult', checkResult);
 
 

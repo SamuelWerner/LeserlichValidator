@@ -2,10 +2,22 @@ doctype html
 html
     head
         title= title
+        link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
+        link(rel='stylesheet' href='/css/style.css')
+        script(src='https://code.jquery.com/jquery-3.3.1.js')
+        script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
+
+
     body
-        h1 Leserator.de
-        form(method='POST' action='/validateWebsite')
-            input#name.form-control(type='text' name='url')
-            button.btn.btn-primary(type='submit') validieren
+        div(class="wrapper")
+            h1 Leserator.de
+            form(method='POST' action='/validateWebsite')
+                input#name.form-control(type='text' name='url')
+                button.btn.btn-primary(type='submit') Validieren
+        footer
+            ul
+                li: a(href="/handbuch") Handbuch
+                li: a(href="/about") Über Uns
+                li: a(href="/impressum") Impressum
 
 

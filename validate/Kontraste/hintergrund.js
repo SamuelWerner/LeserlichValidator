@@ -1,5 +1,9 @@
 function background (dom){
-    let title = $('title').text();
+    var i = 0;
+    for (let node of dom.window.document.querySelectorAll('*')){ //querySelectorAll to get Elements from css code
+        if (node.color){
+            console.log(node);
+        }
 
-    return title;
+    }
 }

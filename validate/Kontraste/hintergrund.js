@@ -1,6 +1,6 @@
 var lineOfCode = require('../../../lineOfCode');
 
-exports.validate = function(dom) {
+exports.validateBackground = function(dom) {
     var result = background(dom);
     if (result == ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"

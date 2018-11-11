@@ -10,6 +10,9 @@ exports.validateBackground = function(dom) {
 
 function background (dom){
     result = "";
-
+    for (let node of dom.window.document.querySelectorAll('*')){
+        if (node.color)
+            result = node.color;
+    }
     return result;
 }

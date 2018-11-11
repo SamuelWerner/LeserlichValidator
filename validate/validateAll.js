@@ -49,7 +49,7 @@ exports.validateAll = function(dom, jsonDataStructure){
     return jsonDataStructure;
 }
 
-exports.validateAllBackground = function(dom, jsonDataStructure){
+exports.validateAll = function(dom, jsonDataStructure){
 
     jsonDataStructure['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund.validateBackground(dom);
 

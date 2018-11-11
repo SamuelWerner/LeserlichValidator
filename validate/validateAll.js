@@ -49,9 +49,9 @@ exports.validateAll = function(dom, jsonDataStructure){
     return jsonDataStructure;
 }
 
-exports.validateAll = function(dom, jsonDataStructure){
+/*exports.validateAll = function(dom, jsonDataStructure){
 
     jsonDataStructure['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund.validate(dom);
 
     return jsonDataStructure;
-}
+}*/

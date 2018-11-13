@@ -10,11 +10,11 @@ exports.validate = function(dom) {
 
 function background (dom){
    var result = "";
-    for (let node of dom.window.document.querySelectorAll('*')) { // matches the CSS selectors
+/*    for (let node of dom.window.document.querySelectorAll('*')) { // matches the CSS selectors
         for (let cssProp of window.getComputedStyle(node, null).getPropertyValue("background-color")){
            if(cssProp != null)
             result = cssProp;
         }
-    }
+    }*/
     return result;
 }

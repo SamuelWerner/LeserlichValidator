@@ -45,13 +45,7 @@ const validateSchriftZeichenZeichenbezogenAbstandHintergrund= require('./Schrift
 exports.validateAll = function(dom, jsonDataStructure){
 
     jsonDataStructure['Schrift']['inhalt']['HumanistischeGroteskschriften']['ergebnis']=validateSchriftZeichenSchriftartGrotesk.validate(dom);
-
-    return jsonDataStructure;
-}
-
-exports.validateAll = function(dom, jsonDataStructure){
-
-    jsonDataStructure['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund.validateBackground(dom);
+    jsonDataStructure['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund.validate(dom);
 
     return jsonDataStructure;
 }

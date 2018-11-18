@@ -4,6 +4,7 @@ head
     link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
     script(src='https://code.jquery.com/jquery-3.3.1.js')
     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
+    link(rel='stylesheet' href='/css/style.css')
 
 
 body(style='padding-top:56px').bg-light
@@ -17,6 +18,7 @@ body(style='padding-top:56px').bg-light
                 button.btn.btn-primary(type='submit') OK
 
     main.container
+        div.topInfoBox.alert.alert-success Die Validation ist nur als Inspiration für die eigenen Webseite gedacht. Fehlgeschlagene Validationen sollten nur als Anregungen dienen. Weitere Informationen unter http://leserlich.info
         div.my-3.p-3.bg-white.rounded.shadow-sm
             each kategorie in results
                 h2.display-2 #{kategorie.titel}

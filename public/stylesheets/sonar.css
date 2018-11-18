@@ -59,7 +59,15 @@ html, body, .sonar-wrapper {
 .text{
     text-align: center;
     position: relative;
-    top: 45%;
-    font-family: Arial;
-    size: 20px;
+    top: 28%;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 40px !important;
+}
+
+.textExplain{
+    text-align: center;
+    position: relative;
+    top: 28%;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    size: 20px !important;
 }

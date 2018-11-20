@@ -47,6 +47,7 @@ exports.validateAll = function(dom, jsonDataStructure){
     jsonDataStructure['Schrift']['inhalt']['HumanistischeGroteskschriften']['ergebnis']=validateSchriftZeichenSchriftartGrotesk.validate(dom);
     jsonDataStructure['Schrift']['inhalt']['KlassizistischeGroteskschriften']['ergebnis']=validateSchriftZeichenSchriftartKlassGrotesk.validate(dom);
     jsonDataStructure['Schrift']['inhalt']['Serifenschriften']['ergebnis']=validateSchriftZeichenSchriftartSerifen.validate(dom);
+    jsonDataStructure['Schrift']['inhalt']['Ligaturen']['ergebnis']=validateSchriftZeichenSchriftartLigaturen.validate(dom);
 
     return jsonDataStructure;
 }

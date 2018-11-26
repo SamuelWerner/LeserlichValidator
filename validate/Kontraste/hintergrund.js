@@ -1,37 +1,96 @@
 exports.validate = function(dom) {
     var result = backgroundText(dom);
     if (result == ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return "<div class='alert alert-success'>Keine Werte zum validieren vorhanden.</div>"
     } else {
-        return "<div class='alert alert-warning'>Validation fehlgeschlagen</b>: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Folgende Farben wurden validiert</b>: </br>" + result + "</div>";
     }
 
 }
+
 
 function backgroundText (dom){
     result = "";
-    for(let node of dom.window.document.querySelectorAll('*')){
-        for(let pseudo of ['',':befor', ':after']){
+    var bool = false;
+
+    var relLuBackgroundArray = new Array();
+    var relLuColorArray = new Array();
+
+    var backgroundColorArray = new Array();
+    var textColorArray = new Array();
+
+    var contrastArray = new Array();
+
+    for(var node of dom.window.document.querySelectorAll('*')) {
+        for (let pseudo of ['', ':befor', ':after']) {
+
+
             let backgroundColor = dom.window.getComputedStyle(node, pseudo).backgroundColor;
             let color = dom.window.getComputedStyle(node, pseudo).color;
 
-            backgroundColor = backgroundColor.substr(4);
-            backgroundColor = backgroundColor.slice(0,-1);
-           var backgroundSplit = backgroundColor.split(",");
+            if (backgroundColor.length != "") {
+                backgroundColor = backgroundColor.substr(4);
+                backgroundColor = backgroundColor.slice(0, -1);
+                var backgroundSplit = backgroundColor.split(",");
 
-            var valueR = parseInt(backgroundSplit[0]);
-            var valueG = parseInt(backgroundSplit[1]);
-            var valueB = parseInt(backgroundSplit[2]);
+                var bgValueR = parseInt(backgroundSplit[0]);
+                var bgValueG = parseInt(backgroundSplit[1]);
+                var bgValueB = parseInt(backgroundSplit[2]);
 
-                if ( backgroundColor.length != 0 || color.length !=0){
+                var relLumiBackgroundC = RelativeLuminance(bgValueR, bgValueG, bgValueB);
 
-                  result += "BackgroundColor: "+ backgroundColor + "->" + RelativeLuminance(valueR,valueG,valueB)+"<br/>";
-                  break;
+                relLuBackgroundArray.push(relLumiBackgroundC);
+                backgroundColorArray.push(backgroundColor);
+
             }
+            if (color.length != ""){
+                color = color.substr(4);
+                color = color.slice(0, -1);
+                var colorSplit = color.split(",");
+
+                var cValueR = parseInt(colorSplit[0]);
+                var cValueG = parseInt(colorSplit[1]);
+                var cValueB = parseInt(colorSplit[2]);
+
+                var relLumiTextColor = RelativeLuminance(cValueR, cValueG, cValueB);
+
+                relLuColorArray.push(relLumiTextColor);
+                textColorArray.push(color);
+            }
+
+          //  var tags = node.textContent;
+            // var parentTags = node.parentNode.textContent;
+
+            //result +=  node + " -> " + "Hintergrund: " + backgroundColor + "</br>" + node + "Textfarbe: " + color + "</br>" + "Kontrast: "+ contrast + "</br>" + "</br>";
+            break;
+
         }
     }
-    return result;
+
+    for ( let i = 0; i < relLuBackgroundArray.length; i++){
+        for (let j = 0; j < relLuColorArray.length; j++) {
+
+            var contrast = contrastRelation(relLuBackgroundArray[i], relLuColorArray[j]);
+          /* if (isNaN(contrast))
+                continue;
+            if (contrastArray.includes(contrast))
+                continue;
+            contrastArray.push(contrast);*/
+
+
+            result += node + "</br>" + "Hintergrund: " + backgroundColorArray[i] + "</br>" + node +"</br>" + "Textfarbe: " + textColorArray[j] + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "</br>";
+
+            }
+
+        }
+
+
+
+
+    return  result;
 }
+
+
 
 function RelativeLuminance(r,g,b){
     var rNormalisiert = r/255; // 255 is the top color value equal to 1 for der lightest color value
@@ -58,6 +117,7 @@ function RelativeLuminance(r,g,b){
 
     return relativeLuminance;
 }
+
 
 function contrastRelation(background, color){
     var y1;

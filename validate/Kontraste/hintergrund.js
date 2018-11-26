@@ -78,7 +78,7 @@ function backgroundText (dom){
             contrastArray.push(contrast);*/
 
 
-            result += node + "</br>" + "Hintergrund: " + backgroundColorArray[i] + "</br>" + node +"</br>" + "Textfarbe: " + textColorArray[j] + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "</br>";
+            result +=  "Hintergrund: " + backgroundColorArray[i] + "</br>" + "Textfarbe: " + textColorArray[j] + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "</br>";
 
             }
 

@@ -67,12 +67,12 @@
         "beschreibung": "Klassizistische Groteskschriften wie z. B. Arial oder Helvetica sind aufgrund ihrer geschlosseneren Buchstabenformen weniger geeignet als humanistische Groteskschriften.",
         "ergebnis": ""
       },
-      "Serifenschriften ": {
+      "Serifenschriften": {
         "titel": "<small class='text-muted'>Zeichen/Schriftart/</small>Serifenschriften",
         "beschreibung": "Bei Verwendung von Serifenschriften sind Schriften, die dem dynamischen Formprinzip folgen (Renaissance-Antiqua), zu bevorzugen.",
         "ergebnis": ""
       },
-      "KlassizistischeAntiquaschriften ": {
+      "KlassizistischeAntiquaschriften": {
         "titel": "<small class='text-muted'>Zeichen/Schriftart/</small>Klassizistische Antiquaschriften ",
         "beschreibung": "Klassizistische Antiquaschriften sind aufgrund ihrer feinen Haarstriche nicht geeignet.Serifen sollen sich nicht berühren.",
         "ergebnis": ""

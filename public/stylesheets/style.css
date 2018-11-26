@@ -47,3 +47,7 @@ button{
     margin: 5px auto;
     display: block;
 }
+
+.topInfoBox {
+    margin-top: 80px;
+}

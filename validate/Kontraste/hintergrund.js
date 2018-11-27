@@ -71,11 +71,11 @@ function backgroundText (dom){
         for (let j = 0; j < relLuColorArray.length; j++) {
 
             var contrast = contrastRelation(relLuBackgroundArray[i], relLuColorArray[j]);
-          /* if (isNaN(contrast))
+           if (isNaN(contrast))
                 continue;
             if (contrastArray.includes(contrast))
                 continue;
-            contrastArray.push(contrast);*/
+            contrastArray.push(contrast);
 
 
             result +=  "Hintergrund: " + backgroundColorArray[i] + "</br>" + "Textfarbe: " + textColorArray[j] + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "</br>";

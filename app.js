@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/js',express.static(path.join(__dirname, '/public/javascripts')));
 app.use('/css',express.static(path.join(__dirname, '/public/stylesheets')));
+app.use('/data',express.static(path.join(__dirname, '/data')));
 
 app.use('/', indexRouter);
 app.use('/validateWebsite', validateWebsite);

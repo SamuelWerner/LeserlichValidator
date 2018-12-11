@@ -2,7 +2,6 @@ checkResult();
 
 function checkResult(){
     setTimeout (function () {
-        $('#waitingDot').append('.');
         $.ajax({
             url: "/checkResult",
             context: document.body

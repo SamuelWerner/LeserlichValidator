@@ -209,24 +209,18 @@ var jsonDataStructure = {
             }
         }
     }
-}
+};
 
 //
 $( document ).ready(function() {
     jsonDataStructure['Schrift']['inhalt']['HumanistischeGroteskschriften']['ergebnis']= validateSchriftZeichenSchriftartGrotesk();
-    console.log("1");
     jsonDataStructure['Schrift']['inhalt']['KlassizistischeGroteskschriften']['ergebnis']=validateSchriftZeichenSchriftartKlassGrotesk();
-    console.log("2");
     jsonDataStructure['Schrift']['inhalt']['Serifenschriften']['ergebnis']=validateSchriftZeichenSchriftartSerifen();
-    console.log("3");
     jsonDataStructure['Schrift']['inhalt']['Ligaturen']['ergebnis']=validateSchriftZeichenSchriftartLigaturen();
-    console.log("4");
     jsonDataStructure ['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund();
-    console.log("5");
     jsonDataStructure ['Kontrast']['inhalt']['Ebenen']['ergebnis'] =validateKontrasteEbenen();
-    console.log("6");
 
-    var url = window.location.protocol + "//" + window.location.host + "/checkResult"
+    var url = window.location.protocol + "//" + window.location.host + "/checkResult";
 
     $.ajax({
         url: url,
@@ -243,7 +237,6 @@ $( document ).ready(function() {
 
 function validateKontrasteEbenen(){
     result = "";
-    var bool = false;
 
     var relLuBackgroundArray = new Array();
     var relLuColorArray = new Array();
@@ -590,8 +583,8 @@ function validateSchriftZeichenSchriftartGrotesk() {
     result = "";
     var i = 0;
     for (let node of window.document.querySelectorAll('*')) {
-        if (!node.textContent) continue
-        if (!node.style) continue
+        if (!node.textContent) continue;
+        if (!node.style) continue;
 
         for (let pseudo of ['', ':before', ':after']) {
             let fontFamily = window.getComputedStyle(node, pseudo).fontFamily +"";
@@ -607,7 +600,7 @@ function validateSchriftZeichenSchriftartGrotesk() {
             }
         }
     }
-    if (result == ""){
+    if (result === ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
         return "<div class='alert alert-warning'>Es wurden abweichende Schriften erkannt. Evtl prüfen:</b>: </br>" + result + "</div>";

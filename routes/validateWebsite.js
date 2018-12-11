@@ -5,7 +5,6 @@ const phantom = require('phantom');
 const router = express.Router();
 
 router.get('/', function(req, res) {
-
     (async function() {
         session.validationReady = false
         const instance = await phantom.create();
@@ -24,7 +23,6 @@ router.get('/', function(req, res) {
                 href = session.renderURL + href;
                 cheer(this).attr('href', href)
             }
-            console.log(href)
         });
 
         cheer('script').each(function(i, elem) {
@@ -35,7 +33,6 @@ router.get('/', function(req, res) {
                 src = session.renderURL + src;
                 cheer(this).attr('href', src)
             }
-            console.log(src)
         });
 
         cheer('<script src="'+protocol+'://'+host+'/js/validate.js"></script>').insertAfter('body');
@@ -43,7 +40,5 @@ router.get('/', function(req, res) {
         res.send(cheer.html());
     })();
 });
-
-
 
 module.exports = router;

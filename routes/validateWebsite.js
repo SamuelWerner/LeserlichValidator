@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
         await instance.exit();
 
         host = req.headers.host
-        protocol = req.protocol
+        protocol = req.headers.referer.split(':')[0]
         var cheer = cheerio.load(content);
         cheer('link').each(function(i, elem) {
             let href = cheer(this).attr('href')

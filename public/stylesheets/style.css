@@ -51,3 +51,8 @@ button{
 .topInfoBox {
     margin-top: 80px;
 }
+
+.validationBox  {
+    max-height: 300px;
+    overflow-x: auto;
+}

@@ -6,9 +6,12 @@ html
         script(src='/js/waiting.js')
         link(rel='stylesheet', href='/css/sonar.css')
     body
-        div.sonar-wrapper
-            div.sonar-emitter
-                div.text bitte warten
-                div.textExplain Webseite wird im Hintergrund geladen und analysiert
-                div.sonar-wave
+        iframe.iframeWaiting(src='/validateWebsite')
+        div.modalWaiting
+            div.modalWaiting-content
+                div.sonar-wrapper
+                    div.sonar-emitter
+                        div.text Bitte warten.
+                        div.textExplain #{url} wird im Hintergrund geladen und analysiert.
+                        div.sonar-wave
 

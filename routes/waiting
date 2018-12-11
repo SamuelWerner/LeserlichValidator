@@ -1,12 +1,29 @@
 var express = require('express');
 var router = express.Router();
+const session = require('express-session');
 
 
 /* GET home page. */
+router.post('/', function(req, res) {
+    let url = addHttp(req.body.url);
+    session.validationURL = url.substring(8);
+    session.renderURL = url
+    req.body.url
+    res.render('waiting', { title: 'Leserator.de', url: url});
+});
+
 router.get('/', function(req, res) {
     req.body.url
-    res.render('waiting', { title: 'Leserator.de'});
+    res.render('waiting', { title: 'Leserator.de', url: req.body.url});
 });
+
+function addHttp(url) {
+    result = url;
+    if (!/^(f|ht)tps?:\/\//i.test(url)) {
+        var result = "https://" + url;
+    }
+    return result;
+}
 
 module.exports = router;
 

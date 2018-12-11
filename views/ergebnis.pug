@@ -13,7 +13,7 @@ body(style='padding-top:56px').bg-light
             b &nbsp;#{url}
         div.navbar-collapse.offcanvas-collapse
             ul.navbar-nav.mr-auto
-            form(method='POST' action='/validateWebsite').form-inline.my-2.my-lg-0
+            form(method='POST' action='/waiting').form-inline.my-2.my-lg-0
                 input#name.form-control(type='text' name='url')
                 button.btn.btn-primary(type='submit') OK
 
@@ -26,5 +26,6 @@ body(style='padding-top:56px').bg-light
                     div.my-3.p-3.bg-white.rounded.shadow-sm
                         h3 !{schritt.titel}
                         div #{schritt.beschreibung}
-                            div !{schritt.ergebnis}
+                            if schritt.ergebnis
+                                div.validationBox !{schritt.ergebnis}
                 hr

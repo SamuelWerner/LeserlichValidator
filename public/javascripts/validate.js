@@ -82,26 +82,6 @@ var jsonDataStructure = {
                 "beschreibung": "Ligaturen (Verbindung von zwei Buchstaben in einem Zeichen) erschweren in manchen Fällen die Erkennbarkeit einzelner Zeichen und sollen daher mit Bedacht gesetzt werden.",
                 "ergebnis": ""
             },
-            "SchriftgroessenEmpfehlung": {
-                "titel": "<small class='text-muted'>Zeichen/Schriftgröße/</small>DIN 1450",
-                "beschreibung": "Die Schriftgrößenempfehlungen der DIN 1450 berücksichtigen unterschiedliche Textarten, den Betrachtungsabstand und die Sehschärfe (Visus) und beziehen sich auf die Mittellänge, die in Millimetern angegeben wird.",
-                "ergebnis": ""
-            },
-            "SchriftgroessenEmpfehlungSehbehinderung": {
-                "titel": "<small class='text-muted'>Zeichen/Schriftgröße/</small>Sehbehinderung",
-                "beschreibung": "Für Menschen mit Sehbehinderungen wird die Multiplikation der angegebenen Größen mit einem Faktor zwischen 1,4 und 1,75 empfohlen (Visus 0,4 bis 0,5).",
-                "ergebnis": ""
-            },
-            "SchriftgroessenEmpfehlungEndgeraete": {
-                "titel": "<small class='text-muted'>Zeichen/Schriftgröße/</small>Verschiedene Endgeräte",
-                "beschreibung": "Der Schriftgrößenrechner erleichtert es, die richtige Schriftgröße für den konkreten Anwendungsfall zu ermitteln.",
-                "ergebnis": ""
-            },
-            "SchriftgroessenEmpfehlungHintergrund": {
-                "titel": "<small class='text-muted'>Zeichen/Schriftgröße/</small>Heller Text auf dunklem Hintergrund",
-                "beschreibung": "Bei hellem Text auf dunklem Hintergrund sollte die Schriftgröße um 10 % erhöht werden.",
-                "ergebnis": ""
-            },
             "StrichstaerkeRegular": {
                 "titel": "<small class='text-muted'>Zeichen/Strichstärke/</small>Strichstärke Regular",
                 "beschreibung": "Regular (je nach Font auch Normal, Book, Roman, Text) Feine und fette Schriftstärken vermeiden.",
@@ -127,24 +107,9 @@ var jsonDataStructure = {
                 "beschreibung": "Verringerung der im Schriftfont eingerichteten Zeichenabstände vermeiden. Keine Sperrung von Text (großer Zeichenabstand).",
                 "ergebnis": ""
             },
-            "SerifenBeruehrung": {
-                "titel": "<small class='text-muted'>Zeichen/Zeichenbezogene Empfehlung/</small>Serifen",
-                "beschreibung": "Serifen sollen sich nicht berühren.",
-                "ergebnis": ""
-            },
-            "ZeichenabstandHintergrund": {
-                "titel": "<small class='text-muted'>Zeichen/Zeichenbezogene Empfehlung/</small>Hintergrund",
-                "beschreibung": "Bei hellem Text auf dunklem Hintergrund Zeichenabstand um ca. 2 % erhöhen.",
-                "ergebnis": ""
-            },
             "SchreibweiseVersalien": {
                 "titel": "<small class='text-muted'>Zeichen/Schreibweise/</small>Versalien",
-                "beschreibung": "Texte in gemischter Groß- und Kleinschreibung setzen (Keine Versalien).",
-                "ergebnis": ""
-            },
-            "HervorhebungenZwischenueberschriften": {
-                "titel": "<small class='text-muted'>Zeichen/Hervorhebung/</small>Zwischenüberschriften",
-                "beschreibung": "Hervorhebungen von Zwischenüberschriften und Auszeichnungen durch (halb-)fette und kursive Schriften.",
+                "beschreibung": "Texte in gemischter Groß- und Kleinschreibung setzen (Also keine Versalien verwenden).",
                 "ergebnis": ""
             },
             "HervorhebungZusaetzlicheUnterscheidung": {
@@ -160,16 +125,6 @@ var jsonDataStructure = {
             "HervorhebungUnterstreichungLinks": {
                 "titel": "<small class='text-muted'>Zeichen/Hervorhebung/</small>Links",
                 "beschreibung": "Unterstreichungen nur für Links.",
-                "ergebnis": ""
-            },
-            "ZeilenabstandOberUnterlaenge": {
-                "titel": "<small class='text-muted'>Text/Zeilenabstand/</small>Ober- Unterlänge",
-                "beschreibung": "Ober- und Unterlängen sollen sich nicht berühren.",
-                "ergebnis": ""
-            },
-            "ZeilenabstandLangeZeilen": {
-                "titel": "<small class='text-muted'>Text/Zeilenabstand/</small>Lange Zeilen",
-                "beschreibung": "Bei langen Zeilen sollte der Zeilenabstand vergrößert werden.",
                 "ergebnis": ""
             },
             "ZeilenlaengeMaximal": {
@@ -204,7 +159,7 @@ var jsonDataStructure = {
             },
             "Linienstaerke": {
                 "titel": "<small class='text-muted'>Text/Ränder und Abstände/</small>Linienstärke",
-                "beschreibung": "Linienstärke von Tabellen und Trennlinien sollen mindestens 1 Pica-Punkt bzw. 2 Pixel.",
+                "beschreibung": "Linienstärke von Tabellen und Trennlinien sollen mindestens 1 Pica-Punkt bzw. 2 Pixel betragen.",
                 "ergebnis": ""
             }
         }

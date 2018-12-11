@@ -87,11 +87,6 @@ var jsonDataStructure = {
                 "beschreibung": "Regular (je nach Font auch Normal, Book, Roman, Text) Feine und fette Schriftstärken vermeiden.",
                 "ergebnis": ""
             },
-            "Strichstaerkenkontrast": {
-                "titel": "<small class='text-muted'>Zeichen/Strichstärke/</small>Strichstärkenkontrast",
-                "beschreibung": "Schriften mit hohem Strichstärkenkontrast vermeiden.",
-                "ergebnis": ""
-            },
             "NormaleSchriftweite": {
                 "titel": "<small class='text-muted'>Zeichen/Schriftweite/</small>Normale Schriftweiten",
                 "beschreibung": "Normale Schriftweiten (schmale oder breite Schriftweiten vermeiden).",
@@ -169,6 +164,7 @@ $( document ).ready(function() {
     jsonDataStructure['Schrift']['inhalt']['Ligaturen']['ergebnis']=validateSchriftZeichenSchriftartLigaturen();
     jsonDataStructure['Schrift']['inhalt']['KlassizistischeAntiquaschriften']['ergebnis']=validateSchriftZeichenSchriftartKlassAntiqua();
     jsonDataStructure['Schrift']['inhalt']['StrichstaerkeRegular']['ergebnis']=validateSchriftZeichenRegular()
+    jsonDataStructure ['Schrift']['inhalt']['NormaleSchriftweite']['ergebnis']= validateZeichenSchriftweite();
     jsonDataStructure ['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund();
     jsonDataStructure ['Kontrast']['inhalt']['Ebenen']['ergebnis'] =validateKontrasteEbenen();
 
@@ -449,6 +445,35 @@ function contrastRelation(background, color){
 }
 
 // ####################################################################################################################
+// ################### Zeichen/Schriftweite/Normale Schriftweiten######################################################
+// ####################################################################################################################
+
+function validateZeichenSchriftweite() {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
+        for (let pseudo of ['', ':before', ':after']) {
+            let tmpCssValue = window.getComputedStyle(node, pseudo).fontStretch +"";
+            if (tmpCssValue && tmpCssValue !== "" && tmpCssValue !== 'normal' && tmpCssValue !== 'unset'  && tmpCssValue !== '100%'){
+                node.classList.add("validationMarker"+i);
+                result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +tmpCssValue+"</br>";
+                node.classList.remove("validationMarker"+i);
+                i++;
+                break;
+            }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden breite und/oder schmale Schriftarten erkannt, ggf. ersetzen: </br>" + result + "</div>";
+    }
+}
+
+// ####################################################################################################################
 // ################### Zeichen Schriftart Klass. Antiqua###############################################################
 // ####################################################################################################################
 
@@ -464,7 +489,7 @@ function validateSchriftZeichenSchriftartKlassAntiqua () {
             if (fontFamily && fontFamily !== ""){
                 if (fontFamily.includes("Antiqua")){
                     node.classList.add("validationMarker"+i);
-                    result += "Zeile Body: " + lineOfCode(dom.window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +fontFamily+"</br>";
+                    result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +fontFamily+"</br>";
                     node.classList.remove("validationMarker"+i);
                     i++;
                     break;
@@ -475,7 +500,7 @@ function validateSchriftZeichenSchriftartKlassAntiqua () {
     if (result === ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Klassizistische Antiquaschriften Schriften erkannt. Evtl prüfen und durch Humanistische Groteskschriften ersetzen:</b>: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Es wurden Klassizistische Antiquaschriften Schriften erkannt. Evtl prüfen und durch Humanistische Groteskschriften ersetzen: </br>" + result + "</div>";
     }
 }
 
@@ -502,7 +527,7 @@ function validateSchriftZeichenSchriftartLigaturen() {
     if (result === ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Ligaturen erkannt.</b>: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Es wurden Ligaturen erkannt: </br>" + result + "</div>";
     }
 }
 
@@ -534,7 +559,7 @@ function validateSchriftZeichenSchriftartSerifen () {
     if (result === ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Schriften mit Serifen erkannt. Falls die Serifen beibehalten werden sollen, kann als Alternative Renaissance-Antiqua verwendet werden:</b>: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Es wurden Schriften mit Serifen erkannt. Falls die Serifen beibehalten werden sollen, kann als Alternative Renaissance-Antiqua verwendet werden: </br>" + result + "</div>";
     }
 }
 
@@ -555,7 +580,7 @@ function validateSchriftZeichenSchriftartKlassGrotesk () {
             if (fontFamily && fontFamily !== ""){
                 if (fontFamily.includes("Helvetica") || fontFamily.includes("Arial")){
                     node.classList.add("validationMarker"+i);
-                    result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +": " +fontFamily+"</br>";
+                    result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +fontFamily+"</br>";
                     node.classList.remove("validationMarker"+i);
                     i++;
                     break;
@@ -566,7 +591,7 @@ function validateSchriftZeichenSchriftartKlassGrotesk () {
     if (result === ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Klassizistische Groteskschriften Schriften erkannt. Evtl prüfen und durch Humanistische Groteskschriften ersetzen:</b>: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Es wurden klassizistische groteskschriften erkannt. Bitte prüfen Sie diese an folgenden Stellen und ersetzten sie ggf. Durch eine humanistische Groteskschrift: </br>" + result + "</div>";
     }
 }
 
@@ -598,7 +623,7 @@ function validateSchriftZeichenSchriftartGrotesk() {
     if (result === ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden abweichende Schriften erkannt. Evtl prüfen:</b>: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Es wurden abweichende Schriften erkannt. Ggf. prüfen:</b>: </br>" + result + "</div>";
     }
 }
 
@@ -631,7 +656,7 @@ function validateSchriftZeichenRegular() {
     if (result === ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden abweichende Schriftstärken erkannt. Evtl prüfen:</b>: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Es wurden abweichende Schriftstärken erkannt. Ggf. prüfen: </br>" + result + "</div>";
     }
 }
 

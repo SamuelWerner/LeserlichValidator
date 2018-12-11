@@ -152,11 +152,6 @@ var jsonDataStructure = {
                 "beschreibung": "Abstand zwischen Text und Bildern und zwischen Textspalten mindestens 6 mm.",
                 "ergebnis": ""
             },
-            "AbstaendeFlattersatz": {
-                "titel": "<small class='text-muted'>Text/Ränder und Abstände/</small>Flattersatz",
-                "beschreibung": "Bei Textspalten in linksbündigem Flattersatz Trennlinien zwischen den Spalten einfügen.",
-                "ergebnis": ""
-            },
             "Linienstaerke": {
                 "titel": "<small class='text-muted'>Text/Ränder und Abstände/</small>Linienstärke",
                 "beschreibung": "Linienstärke von Tabellen und Trennlinien sollen mindestens 1 Pica-Punkt bzw. 2 Pixel betragen.",
@@ -172,6 +167,8 @@ $( document ).ready(function() {
     jsonDataStructure['Schrift']['inhalt']['KlassizistischeGroteskschriften']['ergebnis']=validateSchriftZeichenSchriftartKlassGrotesk();
     jsonDataStructure['Schrift']['inhalt']['Serifenschriften']['ergebnis']=validateSchriftZeichenSchriftartSerifen();
     jsonDataStructure['Schrift']['inhalt']['Ligaturen']['ergebnis']=validateSchriftZeichenSchriftartLigaturen();
+    jsonDataStructure['Schrift']['inhalt']['KlassizistischeAntiquaschriften']['ergebnis']=validateSchriftZeichenSchriftartKlassAntiqua();
+    jsonDataStructure['Schrift']['inhalt']['StrichstaerkeRegular']['ergebnis']=validateSchriftZeichenRegular()
     jsonDataStructure ['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund();
     jsonDataStructure ['Kontrast']['inhalt']['Ebenen']['ergebnis'] =validateKontrasteEbenen();
 
@@ -450,19 +447,54 @@ function contrastRelation(background, color){
     return contrastRelation;
 
 }
+
+// ####################################################################################################################
+// ################### Zeichen Schriftart Klass. Antiqua###############################################################
+// ####################################################################################################################
+
+function validateSchriftZeichenSchriftartKlassAntiqua () {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
+        for (let pseudo of ['', ':before', ':after']) {
+            let fontFamily = window.getComputedStyle(node, pseudo).fontFamily +"";
+            if (fontFamily && fontFamily !== ""){
+                if (fontFamily.includes("Antiqua")){
+                    node.classList.add("validationMarker"+i);
+                    result += "Zeile Body: " + lineOfCode(dom.window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +fontFamily+"</br>";
+                    node.classList.remove("validationMarker"+i);
+                    i++;
+                    break;
+                }
+            }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden Klassizistische Antiquaschriften Schriften erkannt. Evtl prüfen und durch Humanistische Groteskschriften ersetzen:</b>: </br>" + result + "</div>";
+    }
+}
+
+
 // ####################################################################################################################
 // ################### Zeichen Schriftart Ligaturen ###################################################################
 // ####################################################################################################################
 
 function validateSchriftZeichenSchriftartLigaturen() {
-    result = "";
+    let result = "";
     var i = 0;
-    for (let node of window.document.querySelectorAll('*')) {
+    for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
         let text = node.textContent;
         if (text.includes("Æ") || text.includes("æ") || text.includes("Œ") || text.includes("œ") || text.includes("Ĳ") || text.includes("ĳ")){
             node.classList.add("validationMarker"+i);
-            result += "Zeile " + lineOfCode(window.document.documentElement.innerHTML, "validationMarker"+i) + ": " +text+"</br>";
+            result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +text+"</br>";
+            node.classList.remove("validationMarker"+i);
             i++;
             break;
         }
@@ -474,19 +506,25 @@ function validateSchriftZeichenSchriftartLigaturen() {
     }
 }
 
+// ####################################################################################################################
+// ################### Zeichen Schriftart Serifen #####################################################################
+// ####################################################################################################################
+
 function validateSchriftZeichenSchriftartSerifen () {
     result = "";
     var i = 0;
-    for (let node of window.document.querySelectorAll('*')) {
+    for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
 
         for (let pseudo of ['', ':before', ':after']) {
             let fontFamily = window.getComputedStyle(node, pseudo).fontFamily +"";
             if (fontFamily && fontFamily !== ""){
                 if (fontFamily.includes("serif") && !fontFamily.includes("-serif")){
                     node.classList.add("validationMarker"+i);
-                    result += "Zeile " + lineOfCode(window.document.documentElement.innerHTML, "validationMarker"+i) + ": " +fontFamily+"</br>";
+                    result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +fontFamily+"</br>";
+                    node.classList.remove("validationMarker"+i);
                     i++;
                     break;
                 }
@@ -507,16 +545,18 @@ function validateSchriftZeichenSchriftartSerifen () {
 function validateSchriftZeichenSchriftartKlassGrotesk () {
     result = "";
     var i = 0;
-    for (let node of window.document.querySelectorAll('*')) {
+    for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
 
         for (let pseudo of ['', ':before', ':after']) {
             let fontFamily = window.getComputedStyle(node, pseudo).fontFamily +"";
             if (fontFamily && fontFamily !== ""){
                 if (fontFamily.includes("Helvetica") || fontFamily.includes("Arial")){
                     node.classList.add("validationMarker"+i);
-                    result += "Zeile " + lineOfCode(window.document.documentElement.innerHTML, "validationMarker"+i) + ": " +fontFamily+"</br>";
+                    result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +": " +fontFamily+"</br>";
+                    node.classList.remove("validationMarker"+i);
                     i++;
                     break;
                 }
@@ -537,18 +577,18 @@ function validateSchriftZeichenSchriftartKlassGrotesk () {
 function validateSchriftZeichenSchriftartGrotesk() {
     result = "";
     var i = 0;
-    for (let node of window.document.querySelectorAll('*')) {
+    for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE'  || node.nodeName === 'TITLE') continue;
 
         for (let pseudo of ['', ':before', ':after']) {
             let fontFamily = window.getComputedStyle(node, pseudo).fontFamily +"";
-            // let bg = window.getComputedStyle(node, pseudo).backgroundColor +"";
-            // if (bg !== '') console.log(bg)
             if (fontFamily && fontFamily !== ""){
                 if (!fontFamily.includes("sans-serif") && !fontFamily.includes("inherit") && !fontFamily.includes("-webkit-small-control") && !fontFamily.includes("monospace")){
                     node.classList.add("validationMarker"+i);
-                    result += "Zeile " + lineOfCode(window.document.documentElement.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +fontFamily+"</br>";
+                    result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +fontFamily+"</br>";
+                    node.classList.remove("validationMarker"+i);
                     i++;
                     break;
                 }
@@ -559,6 +599,39 @@ function validateSchriftZeichenSchriftartGrotesk() {
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
         return "<div class='alert alert-warning'>Es wurden abweichende Schriften erkannt. Evtl prüfen:</b>: </br>" + result + "</div>";
+    }
+}
+
+
+// ####################################################################################################################
+// ################### Zeichen Strichstärke Regular ####################################################################
+// ####################################################################################################################
+
+function validateSchriftZeichenRegular() {
+    result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE'  || node.nodeName === 'TITLE') continue;
+
+        for (let pseudo of ['', ':before', ':after']) {
+            let fontWeight = window.getComputedStyle(node, pseudo).fontWeight +"";
+            if (fontWeight && fontWeight !== ""){
+                if (!fontWeight.includes("normal") && !fontWeight.includes("400")){
+                    node.classList.add("validationMarker"+i);
+                    result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +fontWeight+"</br>";
+                    node.classList.remove("validationMarker"+i);
+                    i++;
+                    break;
+                }
+            }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden abweichende Schriftstärken erkannt. Evtl prüfen:</b>: </br>" + result + "</div>";
     }
 }
 

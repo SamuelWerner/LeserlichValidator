@@ -155,12 +155,12 @@ $( document ).ready(function() {
 
     var url = window.location.protocol + "//" + window.location.host + "/checkResult";
 
-    // $.ajax({
-    //     url: url,
-    //     type: 'post',
-    //     contentType: 'application/json',
-    //     data: JSON.stringify(jsonDataStructure)
-    // })
+    $.ajax({
+        url: url,
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(jsonDataStructure)
+    })
 });
 
 

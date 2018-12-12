@@ -43,7 +43,7 @@ router.get('/', function(req, res) {
                     cheer(this).attr('href', src)
                 }
             });
-
+            cheer('head').append('<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">')
             cheer('<script src="'+protocol+'://'+host+'/js/validate.js"></script>').insertAfter('body');
             cheer('<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>').insertAfter('body');
             res.send(cheer.html());

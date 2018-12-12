@@ -14,8 +14,10 @@ body(style='padding-top:56px').bg-light
         div.navbar-collapse.offcanvas-collapse
             ul.navbar-nav.mr-auto
             form(method='POST' action='/waiting').form-inline.my-2.my-lg-0
-                input#name.form-control(type='text' name='url')
-                button.btn.btn-primary(type='submit') OK
+                label(class='unsichtbar' for='name') Bitte geben Sie hier die URL der zu validierenden Webseite ein.
+                input#name.form-control(type='text' name='url' placeholder='URL eingeben')
+                label(class='unsichtbar' for='validieren') Betätigen Sie den Button, um die Validation der eingegebenen Webseite zu starten. Dies kann einen Moment dauern.
+                button#validieren.btn.btn-primary(type='submit') Validieren
 
     main.container
         div.topInfoBox.alert.alert-success Die Validation ist nur als Inspiration für die eigenen Webseite gedacht. Fehlgeschlagene Validationen sollten nur als Anregungen dienen. Weitere Informationen unter http://leserlich.info
@@ -29,3 +31,9 @@ body(style='padding-top:56px').bg-light
                             if schritt.ergebnis
                                 div.validationBox !{schritt.ergebnis}
                 hr
+
+    footer
+        ul
+            li: a(href="/handbuch") Handbuch
+            li: a(href="/about") Über Uns
+            li: a(href="/impressum") Impressum

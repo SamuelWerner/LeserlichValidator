@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     width: 100%;
+    font-size: 100%;
 }
 
 footer {
@@ -62,4 +63,33 @@ button{
 
 label.unsichtbar {
     display: none;
+}
+
+@media screen and (max-width:800px){
+    body{
+        font-size: 90%;
+    }
+}
+@media screen and (max-width: 575px){
+    body{
+        font-size:80%;
+    }
+    footer ul li {
+        display: block;
+        text-align: center;
+    }
+    footer {
+        height: 9em;
+    }
+}
+
+button{
+    margin: 0;
+}
+.mainbutton{
+    margin: .5em auto;
+}
+
+.p-3 {
+    padding: 3em!important;
 }

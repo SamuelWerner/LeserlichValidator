@@ -16,7 +16,6 @@ router.get('/', function(req, res) {
             resources: "usable",
             features : {
                                 FetchExternalResources   : ['script'],
-                                ProcessExternalResources : ['script'],
                                 MutationEvents           : '2.0',
                                 QuerySelector            : false
                             }

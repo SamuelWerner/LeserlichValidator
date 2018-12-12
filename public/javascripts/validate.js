@@ -92,11 +92,6 @@ var jsonDataStructure = {
                 "beschreibung": "Normale Schriftweiten (schmale oder breite Schriftweiten vermeiden).",
                 "ergebnis": ""
             },
-            "Zeichenabstand": {
-                "titel": "<small class='text-muted'>Zeichen/Zeichenbezogene Empfehlung/</small>Zeichenabstand",
-                "beschreibung": "Der Zeichenabstand mindestens ein drittel der Mittellänge betragen.",
-                "ergebnis": ""
-            },
             "VoreingestellterZeichenabstand": {
                 "titel": "<small class='text-muted'>Zeichen/Zeichenbezogene Empfehlung/</small>Zeichenabstand",
                 "beschreibung": "Verringerung der im Schriftfont eingerichteten Zeichenabstände vermeiden. Keine Sperrung von Text (großer Zeichenabstand).",
@@ -105,11 +100,6 @@ var jsonDataStructure = {
             "SchreibweiseVersalien": {
                 "titel": "<small class='text-muted'>Zeichen/Schreibweise/</small>Versalien",
                 "beschreibung": "Texte in gemischter Groß- und Kleinschreibung setzen (Also keine Versalien verwenden).",
-                "ergebnis": ""
-            },
-            "HervorhebungZusaetzlicheUnterscheidung": {
-                "titel": "<small class='text-muted'>Zeichen/Hervorhebung/</small>Zusätzliches Unterscheidungsmerkmal",
-                "beschreibung": "Bei farbigen Texthervorhebungen als zusätzliches Unterscheidungsmerkmal auf ausreichenden Kontrast achten.",
                 "ergebnis": ""
             },
             "HervorhebungenSparsam": {
@@ -125,11 +115,6 @@ var jsonDataStructure = {
             "ZeilenlaengeMaximal": {
                 "titel": "<small class='text-muted'>Text/Zeilenlänge/</small>Zeilenlänge",
                 "beschreibung": "Zeilenlänge bei Lesetext maximal 80 Zeichen je Zeile.",
-                "ergebnis": ""
-            },
-            "TextanordnungWaagrecht": {
-                "titel": "<small class='text-muted'>Text/Textanordnung/</small>Waagrecht",
-                "beschreibung": "Text waagerecht anordnen.",
                 "ergebnis": ""
             },
             "TextanordnungLinks": {
@@ -170,12 +155,12 @@ $( document ).ready(function() {
 
     var url = window.location.protocol + "//" + window.location.host + "/checkResult";
 
-    $.ajax({
-        url: url,
-        type: 'post',
-        contentType: 'application/json',
-        data: JSON.stringify(jsonDataStructure)
-    })
+    // $.ajax({
+    //     url: url,
+    //     type: 'post',
+    //     contentType: 'application/json',
+    //     data: JSON.stringify(jsonDataStructure)
+    // })
 });
 
 

@@ -152,6 +152,7 @@ $( document ).ready(function() {
     jsonDataStructure['Schrift']['inhalt']['StrichstaerkeRegular']['ergebnis']=validateSchriftZeichenRegular()
     jsonDataStructure ['Schrift']['inhalt']['NormaleSchriftweite']['ergebnis']= validateZeichenSchriftweite();
     jsonDataStructure ['Schrift']['inhalt']['VoreingestellterZeichenabstand']['ergebnis']= validateZeichenZeichenabstand();
+    jsonDataStructure ['Schrift']['inhalt']['SchreibweiseVersalien']['ergebnis']= validateZeichenVersalien();
     // Kontrast
     jsonDataStructure ['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund();
     jsonDataStructure ['Kontrast']['inhalt']['Ebenen']['ergebnis'] =validateKontrasteEbenen();
@@ -433,7 +434,36 @@ function contrastRelation(background, color){
 }
 
 // ####################################################################################################################
-// ################### Zeichen/Schriftweite/Zeichenabstand######################################################
+// ################### Zeichen/Schreibweise/Versalien #################################################################
+// ####################################################################################################################
+
+function validateZeichenVersalien() {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
+        for (let pseudo of ['', ':before', ':after']) {
+            let text = node.textContent
+            if (text !== '' && text === text.toUpperCase()){
+                node.classList.add("validationMarker"+i);
+                result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
+                node.classList.remove("validationMarker"+i);
+                i++;
+                break;
+            }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+    }
+}
+
+// ####################################################################################################################
+// ################### Zeichen/Zeichenbezogene Empfehlung/Zeichenabstand ##############################################
 // ####################################################################################################################
 
 function validateZeichenZeichenabstand() {
@@ -447,7 +477,7 @@ function validateZeichenZeichenabstand() {
             let tmpCssValue = window.getComputedStyle(node, pseudo).letterSpacing +"";
             if (tmpCssValue && tmpCssValue !== "" && tmpCssValue !== 'normal'){
                 node.classList.add("validationMarker"+i);
-                result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +tmpCssValue+"</br>";
+                result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +tmpCssValue+"</br>";
                 node.classList.remove("validationMarker"+i);
                 i++;
                 break;
@@ -476,7 +506,7 @@ function validateZeichenSchriftweite() {
             let tmpCssValue = window.getComputedStyle(node, pseudo).fontStretch +"";
             if (tmpCssValue && tmpCssValue !== "" && tmpCssValue !== 'normal' && tmpCssValue !== 'unset'  && tmpCssValue !== '100%'){
                 node.classList.add("validationMarker"+i);
-                result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +tmpCssValue+"</br>";
+                result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +tmpCssValue+"</br>";
                 node.classList.remove("validationMarker"+i);
                 i++;
                 break;
@@ -506,7 +536,7 @@ function validateSchriftZeichenSchriftartKlassAntiqua () {
             if (fontFamily && fontFamily !== ""){
                 if (fontFamily.includes("Antiqua")){
                     node.classList.add("validationMarker"+i);
-                    result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +fontFamily+"</br>";
+                    result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +fontFamily+"</br>";
                     node.classList.remove("validationMarker"+i);
                     i++;
                     break;
@@ -535,7 +565,7 @@ function validateSchriftZeichenSchriftartLigaturen() {
         let text = node.textContent;
         if (text.includes("Æ") || text.includes("æ") || text.includes("Œ") || text.includes("œ") || text.includes("Ĳ") || text.includes("ĳ")){
             node.classList.add("validationMarker"+i);
-            result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +text+"</br>";
+            result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +fontFamily+"</br>";
             node.classList.remove("validationMarker"+i);
             i++;
             break;
@@ -629,7 +659,7 @@ function validateSchriftZeichenSchriftartGrotesk() {
             if (fontFamily && fontFamily !== ""){
                 if (!fontFamily.includes("sans-serif") && !fontFamily.includes("inherit") && !fontFamily.includes("-webkit-small-control") && !fontFamily.includes("monospace")){
                     node.classList.add("validationMarker"+i);
-                    result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +fontFamily+"</br>";
+                    result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +fontFamily+"</br>";
                     node.classList.remove("validationMarker"+i);
                     i++;
                     break;
@@ -662,7 +692,7 @@ function validateSchriftZeichenRegular() {
             if (fontWeight && fontWeight !== ""){
                 if (!fontWeight.includes("normal") && !fontWeight.includes("400")){
                     node.classList.add("validationMarker"+i);
-                    result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +fontWeight+"</br>";
+                    result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +fontWeight+"</br>";
                     node.classList.remove("validationMarker"+i);
                     i++;
                     break;

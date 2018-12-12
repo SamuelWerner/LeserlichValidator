@@ -10,10 +10,12 @@ html
 
     body
         div(class="wrapper")
-            h1 Leserator.de
+            h1 Leserator
             form(method='POST' action='/waiting')
-                input#name.form-control(type='text' name='url')
-                button.btn.btn-primary(type='submit') Validieren
+                label(class='unsichtbar' for='name') Bitte geben Sie hier die URL der zu validierenden Webseite ein.
+                input#name.form-control(type='text' name='url' placeholder='URL eingeben')
+                label(class='unsichtbar' for='validieren') Betätigen Sie den Button, um die Validation der eingegebenen Webseite zu starten. Dies kann einen Moment dauern.
+                button#validieren.btn.btn-primary(type='submit') Validieren
         footer
             ul
                 li: a(href="/handbuch") Handbuch

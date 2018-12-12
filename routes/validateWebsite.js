@@ -21,6 +21,7 @@ router.get('/', function(req, res) {
             if (href && !href.includes('http'))
             {
                 href = session.renderURL + href;
+                console.log(href)
                 cheer(this).attr('href', href)
             }
         });

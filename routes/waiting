@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
 
 function addHttp(url) {
     result = url;
-    if (!/^(f|ht)tps?:\/\//i.test(url)) {
+    if (!/^(f|ht)tp?:\/\//i.test(url)) {
         var result = "https://" + url;
     }
     return result;

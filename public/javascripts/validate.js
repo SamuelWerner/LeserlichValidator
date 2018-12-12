@@ -143,6 +143,7 @@ var jsonDataStructure = {
 
 //
 $( document ).ready(function() {
+    // Schrift
     jsonDataStructure['Schrift']['inhalt']['HumanistischeGroteskschriften']['ergebnis']= validateSchriftZeichenSchriftartGrotesk();
     jsonDataStructure['Schrift']['inhalt']['KlassizistischeGroteskschriften']['ergebnis']=validateSchriftZeichenSchriftartKlassGrotesk();
     jsonDataStructure['Schrift']['inhalt']['Serifenschriften']['ergebnis']=validateSchriftZeichenSchriftartSerifen();
@@ -150,6 +151,8 @@ $( document ).ready(function() {
     jsonDataStructure['Schrift']['inhalt']['KlassizistischeAntiquaschriften']['ergebnis']=validateSchriftZeichenSchriftartKlassAntiqua();
     jsonDataStructure['Schrift']['inhalt']['StrichstaerkeRegular']['ergebnis']=validateSchriftZeichenRegular()
     jsonDataStructure ['Schrift']['inhalt']['NormaleSchriftweite']['ergebnis']= validateZeichenSchriftweite();
+    jsonDataStructure ['Schrift']['inhalt']['VoreingestellterZeichenabstand']['ergebnis']= validateZeichenZeichenabstand();
+    // Kontrast
     jsonDataStructure ['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund();
     jsonDataStructure ['Kontrast']['inhalt']['Ebenen']['ergebnis'] =validateKontrasteEbenen();
 
@@ -427,6 +430,35 @@ function contrastRelation(background, color){
 
     return contrastRelation;
 
+}
+
+// ####################################################################################################################
+// ################### Zeichen/Schriftweite/Zeichenabstand######################################################
+// ####################################################################################################################
+
+function validateZeichenZeichenabstand() {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
+        for (let pseudo of ['', ':before', ':after']) {
+            let tmpCssValue = window.getComputedStyle(node, pseudo).letterSpacing +"";
+            if (tmpCssValue && tmpCssValue !== "" && tmpCssValue !== 'normal'){
+                node.classList.add("validationMarker"+i);
+                result += "Zeile Body: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName + ": " +tmpCssValue+"</br>";
+                node.classList.remove("validationMarker"+i);
+                i++;
+                break;
+            }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden veränderte Zeichenabstände erkannt, ggf. auf 'normal' setzen: </br>" + result + "</div>";
+    }
 }
 
 // ####################################################################################################################

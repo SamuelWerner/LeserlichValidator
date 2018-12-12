@@ -446,7 +446,7 @@ function validateZeichenVersalien() {
         if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
         for (let pseudo of ['', ':before', ':after']) {
             let text = node.textContent
-            if (text !== '' && text === text.toUpperCase()){
+            if (text.length > 1 && text.trim() && text === text.toUpperCase()){
                 node.classList.add("validationMarker"+i);
                 result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
                 node.classList.remove("validationMarker"+i);

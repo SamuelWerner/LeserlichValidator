@@ -4,37 +4,6 @@ html, body {
     font-size: 100%;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 3em;
-    background-color: #333a42;
-    line-height: 100%;
-}
-footer ul{
-    display: block;
-    width: 100%;
-    text-align: right;
-    padding-right: 0.6em;
-    margin: auto;
-}
-footer ul li{
-    display: inline;
-    padding:0em 0.6em 0em 0.6em;
-    line-height: 3em;
-}
-footer ul li a{
-    color: #d1d1d1;
-}
-footer ul li a:hover{
-    color:#ffffff;
-}
-footer ul li a:active{
-    color:#ffffff;
-}
 
 .wrapper{
     text-align: center;
@@ -60,11 +29,27 @@ button{
     overflow-x: auto;
 }
 
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
 
 label.unsichtbar {
     display: none;
 }
 
+@media screen and (max-width:992px){
+    body{
+        font-size: 95%;
+    }
+    nav ul{
+        text-align: center;
+    }
+    .navbar-right{
+         margin-left: 0;
+         margin-right: auto;
+         padding-bottom: 1em;
+     }
+}
 @media screen and (max-width:800px){
     body{
         font-size: 90%;
@@ -73,13 +58,6 @@ label.unsichtbar {
 @media screen and (max-width: 575px){
     body{
         font-size:80%;
-    }
-    footer ul li {
-        display: block;
-        text-align: center;
-    }
-    footer {
-        height: 9em;
     }
 }
 
@@ -93,3 +71,6 @@ button{
 .p-3 {
     padding: 3em!important;
 }
+
+
+

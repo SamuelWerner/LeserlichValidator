@@ -102,11 +102,6 @@ var jsonDataStructure = {
                 "beschreibung": "Texte in gemischter Groß- und Kleinschreibung setzen (Also keine Versalien verwenden).",
                 "ergebnis": ""
             },
-            "HervorhebungenSparsam": {
-                "titel": "<small class='text-muted'>Zeichen/Hervorhebung/</small>Sparsam",
-                "beschreibung": "Hervorhebungen sollten sparsam eingesetzen werden.",
-                "ergebnis": ""
-            },
             "HervorhebungUnterstreichungLinks": {
                 "titel": "<small class='text-muted'>Zeichen/Hervorhebung/</small>Links",
                 "beschreibung": "Unterstreichungen nur für Links.",
@@ -148,7 +143,6 @@ $( document ).ready(function() {
     jsonDataStructure ['Schrift']['inhalt']['TextanordnungLinks']['ergebnis']= validateTextTextanordungAusrichtung();
     jsonDataStructure ['Schrift']['inhalt']['ZeilenlaengeMaximal']['ergebnis']= validateTextZeilelaenge();
     jsonDataStructure ['Schrift']['inhalt']['HervorhebungUnterstreichungLinks']['ergebnis']= validateHervorhebungenLinks();
-    jsonDataStructure ['Schrift']['inhalt']['HervorhebungenSparsam']['ergebnis']= validateHervorhebungenSparsam();
     // Kontrast
     jsonDataStructure ['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund();
     jsonDataStructure ['Kontrast']['inhalt']['Ebenen']['ergebnis'] =validateKontrasteEbenen();
@@ -554,33 +548,6 @@ function validateHervorhebungenLinks() {
     }
 }
 
-// ####################################################################################################################
-// ################### Zeichen/Hervorhebungen/Sparsam#################################################################
-// ####################################################################################################################
-
-function validateHervorhebungenSparsam() {
-    let result = "";
-    var i = 0;
-    for (let node of window.document.body.querySelectorAll('*')) {
-        if (!node.textContent) continue;
-        if (!node.style) continue;
-        for (let pseudo of ['', ':before', ':after']) {
-            // let text = node.textContent
-            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
-            //     node.classList.add("validationMarker"+i);
-            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
-            //     node.classList.remove("validationMarker"+i);
-            //     i++;
-            //     break;
-            // }
-        }
-    }
-    if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
-    } else {
-        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
-    }
-}
 
 // ####################################################################################################################
 // ################### Zeichen/Schreibweise/Versalien #################################################################

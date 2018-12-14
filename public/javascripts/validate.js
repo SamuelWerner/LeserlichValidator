@@ -157,6 +157,8 @@ $( document ).ready(function() {
     })
 });
 
+var globalID = 0;
+
 
 // ####################################################################################################################
 // ################## Konstrast Ebenen ############################################################################
@@ -446,10 +448,12 @@ function validateTextRaenderUndAbstaendeLinienstaerke() {
         }
 
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden zu geringe Tabellen-Ränder erkannt, ggf. die Linienstärke auf 2px erhöhen: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurden zu geringe Tabellen-Ränder erkannt, ggf. die Linienstärke auf 2px erhöhen: </br>" + result + "</div>";
     }
 }
 
@@ -458,7 +462,7 @@ function validateTextRaenderUndAbstaendeLinienstaerke() {
 // ####################################################################################################################
 
 function validateTextTextanordungAusrichtung() {
-    let result = "";
+    let result = '';
     var i = 0;
     var lastNode = null;
     for (let node of window.document.body.querySelectorAll('*')) {
@@ -476,10 +480,12 @@ function validateTextTextanordungAusrichtung() {
             i++;
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === "") {
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurde abweichender Textsatz erkannt, ggf. den Text linksbündig setzen: </br>" + result + "</div>";
+        return label+"<div id='result"+globalID+"' class='alert alert-warning'>Es wurde abweichender Textsatz erkannt, ggf. den Text linksbündig setzen: </br>" + result + "</div>";
     }
 }
 
@@ -512,10 +518,12 @@ function validateTextZeilelaenge() {
             }
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurde eine Text-Zeile mit mehr als 80 Zeichen erkannt, ggf. den Text anpassen: </br>" + result.substring(0,70) + " [...]</div>";
+        return label+"<div class='alert alert-warning'>Es wurde eine Text-Zeile mit mehr als 80 Zeichen erkannt, ggf. den Text anpassen: </br>" + result.substring(0,70) + " [...]</div>";
     }
 }
 
@@ -541,10 +549,12 @@ function validateHervorhebungenLinks() {
             }
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurde unterstrichener Text ohne Verlinkung erkannt, ggf. die Unterstreichung entfernen: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurde unterstrichener Text ohne Verlinkung erkannt, ggf. die Unterstreichung entfernen: </br>" + result + "</div>";
     }
 }
 
@@ -570,10 +580,12 @@ function validateZeichenVersalien() {
             }
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
     }
 }
 
@@ -598,10 +610,12 @@ function validateZeichenZeichenabstand() {
             }
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden veränderte Zeichenabstände erkannt, ggf. auf 'normal' setzen: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurden veränderte Zeichenabstände erkannt, ggf. auf 'normal' setzen: </br>" + result + "</div>";
     }
 }
 
@@ -626,10 +640,12 @@ function validateZeichenSchriftweite() {
             }
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden breite und/oder schmale Schriftarten erkannt, ggf. ersetzen: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurden breite und/oder schmale Schriftarten erkannt, ggf. ersetzen: </br>" + result + "</div>";
     }
 }
 
@@ -656,10 +672,12 @@ function validateSchriftZeichenSchriftartKlassAntiqua () {
             }
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Klassizistische Antiquaschriften Schriften erkannt. Evtl prüfen und durch Humanistische Groteskschriften ersetzen: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurden Klassizistische Antiquaschriften Schriften erkannt. Evtl prüfen und durch Humanistische Groteskschriften ersetzen: </br>" + result + "</div>";
     }
 }
 
@@ -682,10 +700,12 @@ function validateSchriftZeichenSchriftartLigaturen() {
             break;
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Ligaturen erkannt: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurden Ligaturen erkannt: </br>" + result + "</div>";
     }
 }
 
@@ -713,10 +733,12 @@ function validateSchriftZeichenSchriftartSerifen () {
             }
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Schriften mit Serifen erkannt. Falls die Serifen beibehalten werden sollen, kann als Alternative Renaissance-Antiqua verwendet werden: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurden Schriften mit Serifen erkannt. Falls die Serifen beibehalten werden sollen, kann als Alternative Renaissance-Antiqua verwendet werden: </br>" + result + "</div>";
     }
 }
 
@@ -744,10 +766,12 @@ function validateSchriftZeichenSchriftartKlassGrotesk () {
             }
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden klassizistische groteskschriften erkannt. Bitte prüfen Sie diese an folgenden Stellen und ersetzten sie ggf. Durch eine humanistische Groteskschrift: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurden klassizistische groteskschriften erkannt. Bitte prüfen Sie diese an folgenden Stellen und ersetzten sie ggf. Durch eine humanistische Groteskschrift: </br>" + result + "</div>";
     }
 }
 
@@ -775,10 +799,12 @@ function validateSchriftZeichenSchriftartGrotesk() {
             }
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden abweichende Schriften erkannt. Ggf. prüfen:</b>: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurden abweichende Schriften erkannt. Ggf. prüfen:</b>: </br>" + result + "</div>";
     }
 }
 
@@ -807,10 +833,12 @@ function validateSchriftZeichenRegular() {
             }
         }
     }
+    globalID++;
+    var label = '<label class="unsichtbar" for="result'+globalID+'\">Ergebnis Validation:</label>'
     if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+        return label+"<div id='result"+globalID+"' class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden abweichende Schriftstärken erkannt. Ggf. prüfen: </br>" + result + "</div>";
+        return label+"<div class='alert alert-warning'>Es wurden abweichende Schriftstärken erkannt. Ggf. prüfen: </br>" + result + "</div>";
     }
 }
 

@@ -122,16 +122,6 @@ var jsonDataStructure = {
                 "beschreibung": "Linksbündiger Flattersatz ist Blocksatz vorzuziehen. Von mittelaxialem oder rechtsbündigem Satz ist abzusehen.",
                 "ergebnis": ""
             },
-            "AbstaendeRand": {
-                "titel": "<small class='text-muted'>Text/Ränder und Abstände/</small>Seitenrand",
-                "beschreibung": "Deutliche Abstände zwischen Text und Seitenrand einhalten.",
-                "ergebnis": ""
-            },
-            "AbstaendeBilder": {
-                "titel": "<small class='text-muted'>Text/Ränder und Abstände/</small>Bilder",
-                "beschreibung": "Abstand zwischen Text und Bildern und zwischen Textspalten mindestens 6 mm.",
-                "ergebnis": ""
-            },
             "Linienstaerke": {
                 "titel": "<small class='text-muted'>Text/Ränder und Abstände/</small>Linienstärke",
                 "beschreibung": "Linienstärke von Tabellen und Trennlinien sollen mindestens 1 Pica-Punkt bzw. 2 Pixel betragen.",
@@ -155,8 +145,6 @@ $( document ).ready(function() {
     jsonDataStructure ['Schrift']['inhalt']['SchreibweiseVersalien']['ergebnis']= validateZeichenVersalien();
 
     jsonDataStructure ['Schrift']['inhalt']['Linienstaerke']['ergebnis']= validateTextRaenderUndAbstaendeLinienstaerke();
-    jsonDataStructure ['Schrift']['inhalt']['AbstaendeBilder']['ergebnis']= validateTextRaenderUndAbstaendeBilder();
-    jsonDataStructure ['Schrift']['inhalt']['AbstaendeRand']['ergebnis']= validateTextRaenderUndAbstaendeSeitenrand();
     jsonDataStructure ['Schrift']['inhalt']['TextanordnungLinks']['ergebnis']= validateTextTextanordungAusrichtung();
     jsonDataStructure ['Schrift']['inhalt']['ZeilenlaengeMaximal']['ergebnis']= validateTextZeilelaenge();
     jsonDataStructure ['Schrift']['inhalt']['HervorhebungUnterstreichungLinks']['ergebnis']= validateHervorhebungenLinks();
@@ -454,17 +442,12 @@ function validateTextRaenderUndAbstaendeLinienstaerke() {
             let tmpCssBorderBottom = window.getComputedStyle(node, null).borderBottomWidth.replace('px', '')
             let tmpCssBorderLeft = window.getComputedStyle(node, null).borderLeftWidth.replace('px', '')
             let tmpCssBorderRight = window.getComputedStyle(node, null).borderRightWidth.replace('px', '')
-            console.log(tmpCssBorderBottom.parseInt)
-            console.log(tmpCssBorderTop.parseInt)
-            console.log(tmpCssBorderLeft.parseInt)
-            console.log(tmpCssBorderRight.parseInt)
 
             if (parseInt(tmpCssBorderBottom, 10) < 2  || parseInt(tmpCssBorderTop, 10) < 2 || parseInt(tmpCssBorderLeft, 10) < 2 || parseInt(tmpCssBorderRight, 10) < 2){
                     node.classList.add("validationMarker"+i);
                     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" -> Table-Border:" + "Right: "+tmpCssBorderRight+ ", Left: " +tmpCssBorderLeft+ ", Top: " + tmpCssBorderTop + ", Bottom: " +tmpCssBorderBottom +"</br>";
                     node.classList.remove("validationMarker"+i);
                     i++;
-                    break;
             }
         }
 
@@ -477,88 +460,32 @@ function validateTextRaenderUndAbstaendeLinienstaerke() {
 }
 
 // ####################################################################################################################
-// ################### Text/RaenderUndAbstaende/Bilder ############################################################
-// ####################################################################################################################
-function validateTextRaenderUndAbstaendeBilder() {
-    let result = "";
-    var i = 0;
-    for (let node of window.document.body.querySelectorAll('*')) {
-        if (!node.textContent) continue;
-        if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
-        for (let pseudo of ['', ':before', ':after']) {
-            // let text = node.textContent
-            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
-            //     node.classList.add("validationMarker"+i);
-            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
-            //     node.classList.remove("validationMarker"+i);
-            //     i++;
-            //     break;
-            // }
-        }
-    }
-    if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
-    } else {
-        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
-    }
-}
-
-// ####################################################################################################################
-// ################### Text/RaenderUndAbstaende/Seitenrand ############################################################
-// ####################################################################################################################
-
-function validateTextRaenderUndAbstaendeSeitenrand() {
-    let result = "";
-    var i = 0;
-    for (let node of window.document.body.querySelectorAll('*')) {
-        if (!node.textContent) continue;
-        if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
-        for (let pseudo of ['', ':before', ':after']) {
-            // let text = node.textContent
-            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
-            //     node.classList.add("validationMarker"+i);
-            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
-            //     node.classList.remove("validationMarker"+i);
-            //     i++;
-            //     break;
-            // }
-        }
-    }
-    if (result === ""){
-        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
-    } else {
-        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
-    }
-}
-
-// ####################################################################################################################
 // ################### Text/Textanordung/Ausrichtung ##################################################################
 // ####################################################################################################################
 
 function validateTextTextanordungAusrichtung() {
     let result = "";
     var i = 0;
+    var lastNode = null;
     for (let node of window.document.body.querySelectorAll('*')) {
-        if (!node.textContent) continue;
-        if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
-        for (let pseudo of ['', ':before', ':after']) {
-            // let text = node.textContent
-            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
-            //     node.classList.add("validationMarker"+i);
-            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
-            //     node.classList.remove("validationMarker"+i);
-            //     i++;
-            //     break;
-            // }
+        if (node.innerText.length < 30) continue;
+        if (lastNode && node.innerText === lastNode.innerText) continue
+        lastNode = node
+        if (!node.innerText) continue;
+
+        let tmpCssTxtAlgin = window.getComputedStyle(node, null).textAlign
+
+        if (tmpCssTxtAlgin && (tmpCssTxtAlgin === 'right' || tmpCssTxtAlgin === 'center' || tmpCssTxtAlgin === 'justify' || tmpCssTxtAlgin === 'end')) {
+            node.classList.add("validationMarker" + i);
+            result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker" + i) + ", " + node.nodeName + i + " -> text-align: " + tmpCssTxtAlgin + "-> "+ node.innerText.substring(0, 60) + " [...]</br>";
+            node.classList.remove("validationMarker" + i);
+            i++;
         }
     }
-    if (result === ""){
+    if (result === "") {
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Es wurde abweichender Textsatz erkannt, ggf. den Text linksbündig setzen: </br>" + result + "</div>";
     }
 }
 
@@ -570,24 +497,31 @@ function validateTextZeilelaenge() {
     let result = "";
     var i = 0;
     for (let node of window.document.body.querySelectorAll('*')) {
-        if (!node.textContent) continue;
-        if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
-        for (let pseudo of ['', ':before', ':after']) {
-            // let text = node.textContent
-            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
-            //     node.classList.add("validationMarker"+i);
-            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
-            //     node.classList.remove("validationMarker"+i);
-            //     i++;
-            //     break;
-            // }
+        if (!node.innerText) continue;
+        if (node.innerText.length < 80) continue;
+
+        var charCount = 0;
+        var text = node.innerText.trim();
+        for (var i = 0; i < text.length; i++) {
+            if (text[i] === '\n'){
+                charCount = 0;
+            }
+            charCount++;
+
+            if (charCount >= 80){
+                node.classList.add("validationMarker"+i);
+                result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" -> " +text+"</br>";
+                node.classList.remove("validationMarker"+i);
+                i++;
+                break
+                return line;
+            }
         }
     }
     if (result === ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Es wurde eine Text-Zeile mit mehr als 80 Zeichen erkannt, ggf. den Text anpassen: </br>" + result.substring(0,40) + " [...]</div>";
     }
 }
 
@@ -602,7 +536,6 @@ function validateHervorhebungenLinks() {
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
         for (let pseudo of ['', ':before', ':after']) {
             // let text = node.textContent
             // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
@@ -631,7 +564,6 @@ function validateHervorhebungenSparsam() {
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
         for (let pseudo of ['', ':before', ':after']) {
             // let text = node.textContent
             // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
@@ -660,10 +592,9 @@ function validateZeichenVersalien() {
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
         for (let pseudo of ['', ':before', ':after']) {
             let text = node.textContent
-            if (text.length > 1 && text.trim() && text === text.toUpperCase()){
+            if (text.length > 1 && text.trim() > 1 && text === text.toUpperCase()){
                 node.classList.add("validationMarker"+i);
                 result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
                 node.classList.remove("validationMarker"+i);
@@ -689,7 +620,6 @@ function validateZeichenZeichenabstand() {
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
         for (let pseudo of ['', ':before', ':after']) {
             let tmpCssValue = window.getComputedStyle(node, pseudo).letterSpacing +"";
             if (tmpCssValue && tmpCssValue !== "" && tmpCssValue !== 'normal'){
@@ -718,7 +648,6 @@ function validateZeichenSchriftweite() {
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
         for (let pseudo of ['', ':before', ':after']) {
             let tmpCssValue = window.getComputedStyle(node, pseudo).fontStretch +"";
             if (tmpCssValue && tmpCssValue !== "" && tmpCssValue !== 'normal' && tmpCssValue !== 'unset'  && tmpCssValue !== '100%'){
@@ -747,7 +676,6 @@ function validateSchriftZeichenSchriftartKlassAntiqua () {
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
         for (let pseudo of ['', ':before', ':after']) {
             let fontFamily = window.getComputedStyle(node, pseudo).fontFamily +"";
             if (fontFamily && fontFamily !== ""){
@@ -778,7 +706,6 @@ function validateSchriftZeichenSchriftartLigaturen() {
     var i = 0;
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
         let text = node.textContent;
         if (text.includes("Æ") || text.includes("æ") || text.includes("Œ") || text.includes("œ") || text.includes("Ĳ") || text.includes("ĳ")){
             node.classList.add("validationMarker"+i);
@@ -805,7 +732,6 @@ function validateSchriftZeichenSchriftartSerifen () {
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
 
         for (let pseudo of ['', ':before', ':after']) {
             let fontFamily = window.getComputedStyle(node, pseudo).fontFamily +"";
@@ -837,7 +763,6 @@ function validateSchriftZeichenSchriftartKlassGrotesk () {
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
 
         for (let pseudo of ['', ':before', ':after']) {
             let fontFamily = window.getComputedStyle(node, pseudo).fontFamily +"";
@@ -869,7 +794,6 @@ function validateSchriftZeichenSchriftartGrotesk() {
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE'  || node.nodeName === 'TITLE') continue;
 
         for (let pseudo of ['', ':before', ':after']) {
             let fontFamily = window.getComputedStyle(node, pseudo).fontFamily +"";
@@ -902,7 +826,6 @@ function validateSchriftZeichenRegular() {
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.textContent) continue;
         if (!node.style) continue;
-        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE'  || node.nodeName === 'TITLE') continue;
 
         for (let pseudo of ['', ':before', ':after']) {
             let fontWeight = window.getComputedStyle(node, pseudo).fontWeight +"";

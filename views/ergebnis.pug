@@ -21,7 +21,7 @@ body(style='padding-top:56px').bg-light
                 button#validieren.btn.btn-primary(type='submit') Validieren
 
     main.container
-        div.topInfoBox.alert.alert-success Die Validation ist nur als Inspiration für die eigenen Webseite gedacht. Fehlgeschlagene Validationen sollten nur als Anregungen dienen. Weitere Informationen unter http://leserlich.info
+        div.topInfoBox.alert.alert-success Die Auswertung für #{url} ist abgeschlossen. Die folgenden fehlgeschlagenen Validationen dienen lediglich als Anregung und Inspiration für ihre Webanwendung. Nicht immer sind die Vorschläge für Sie sinnvoll, aber manchmal können unsere Vorschläge zu einer deutlich besseren Lesbarkeit ihrer Webanwendung beitragen. Weitere Informationen erhalten Sie unter #[a(href='http://leserlich.info', target='_blnk') http://leserlich.info].
         div.my-3.p-3.bg-white.rounded.shadow-sm
             each kategorie in results
                 h2.display-2 #{kategorie.titel}

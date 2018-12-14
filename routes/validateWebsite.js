@@ -36,17 +36,18 @@ router.get('/', function(req, res) {
         });
 
         cheer('script').each(function(i, elem) {
-            cheer(this).remove()
-            // let src = cheer(this).attr('src')
-            // if (src && !src.includes('http'))
-            // {
-            //     src = session.renderURL + src;
-            //     cheer(this).attr('src', src)
-            // }
+            //cheer(this).remove()
+            let src = cheer(this).attr('src')
+            if (src && !src.includes('http'))
+            {
+                src = session.renderURL + src;
+                cheer(this).attr('src', src)
+            }
         });
         cheer('<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>').insertAfter('body');
         cheer('<script src="'+protocol+'://'+host+'/js/validate.js"></script>').insertAfter('body');
         cheer('<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>').insertAfter('body');
+        console.log(cheer.html())
         res.send(cheer.html());
     })();
 });

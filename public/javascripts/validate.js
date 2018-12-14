@@ -462,7 +462,7 @@ function validateTextTextanordungAusrichtung() {
     var i = 0;
     var lastNode = null;
     for (let node of window.document.body.querySelectorAll('*')) {
-        if (node.innerText.length < 30) continue;
+        if (node.innerText && node.innerText.length < 30) continue;
         if (lastNode && node.innerText === lastNode.innerText) continue
         lastNode = node
         if (!node.innerText) continue;
@@ -492,7 +492,7 @@ function validateTextZeilelaenge() {
     var i = 0;
     for (let node of window.document.body.querySelectorAll('*')) {
         if (!node.innerText) continue;
-        if (node.innerText.length < 80) continue;
+        if (node.innerText.trim().length < 80) continue;
 
         var charCount = 0;
         var text = node.innerText.trim();
@@ -515,7 +515,7 @@ function validateTextZeilelaenge() {
     if (result === ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurde eine Text-Zeile mit mehr als 80 Zeichen erkannt, ggf. den Text anpassen: </br>" + result.substring(0,40) + " [...]</div>";
+        return "<div class='alert alert-warning'>Es wurde eine Text-Zeile mit mehr als 80 Zeichen erkannt, ggf. den Text anpassen: </br>" + result.substring(0,70) + " [...]</div>";
     }
 }
 
@@ -528,23 +528,23 @@ function validateHervorhebungenLinks() {
     let result = "";
     var i = 0;
     for (let node of window.document.body.querySelectorAll('*')) {
+        console.log('#'+node.nodeName)
         if (!node.textContent) continue;
-        if (!node.style) continue;
-        for (let pseudo of ['', ':before', ':after']) {
-            // let text = node.textContent
-            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
-            //     node.classList.add("validationMarker"+i);
-            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
-            //     node.classList.remove("validationMarker"+i);
-            //     i++;
-            //     break;
-            // }
+        if (node.nodeName !== 'LINK'){
+            let tmpCssTexDecoration = window.getComputedStyle(node, null).textDecoration
+
+            if (tmpCssTexDecoration === 'underline' || node.nodeName === 'u'){
+                node.classList.add("validationMarker"+i);
+                result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" -> " + node.innerText + "</br>";
+                node.classList.remove("validationMarker"+i);
+                i++;
+            }
         }
     }
     if (result === ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Es wurde unterstrichener Text ohne Verlinkung erkannt, ggf. die Unterstreichung entfernen: </br>" + result + "</div>";
     }
 }
 

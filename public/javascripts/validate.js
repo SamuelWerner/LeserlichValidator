@@ -153,18 +153,21 @@ $( document ).ready(function() {
     jsonDataStructure ['Schrift']['inhalt']['NormaleSchriftweite']['ergebnis']= validateZeichenSchriftweite();
     jsonDataStructure ['Schrift']['inhalt']['VoreingestellterZeichenabstand']['ergebnis']= validateZeichenZeichenabstand();
     jsonDataStructure ['Schrift']['inhalt']['SchreibweiseVersalien']['ergebnis']= validateZeichenVersalien();
+
+    jsonDataStructure ['Schrift']['inhalt']['Linienstaerke']['ergebnis']= validateTextRaenderUndAbstaendeLinienstaerke();
+    jsonDataStructure ['Schrift']['inhalt']['AbstaendeBilder']['ergebnis']= validateTextRaenderUndAbstaendeBilder();
+    jsonDataStructure ['Schrift']['inhalt']['AbstaendeRand']['ergebnis']= validateTextRaenderUndAbstaendeSeitenrand();
+    jsonDataStructure ['Schrift']['inhalt']['TextanordnungLinks']['ergebnis']= validateTextTextanordungAusrichtung();
+    jsonDataStructure ['Schrift']['inhalt']['ZeilenlaengeMaximal']['ergebnis']= validateTextZeilelaenge();
+    jsonDataStructure ['Schrift']['inhalt']['HervorhebungUnterstreichungLinks']['ergebnis']= validateHervorhebungenLinks();
+    jsonDataStructure ['Schrift']['inhalt']['HervorhebungenSparsam']['ergebnis']= validateHervorhebungenSparsam();
     // Kontrast
     jsonDataStructure ['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund();
     jsonDataStructure ['Kontrast']['inhalt']['Ebenen']['ergebnis'] =validateKontrasteEbenen();
 
     var url = window.location.protocol + "//" + window.location.host + "/checkResult";
 
-    $.ajax({
-        url: url,
-        type: 'post',
-        contentType: 'application/json',
-        data: JSON.stringify(jsonDataStructure)
-    })
+
 });
 
 
@@ -431,6 +434,215 @@ function contrastRelation(background, color){
 
     return contrastRelation;
 
+}
+
+// ####################################################################################################################
+// ################### Text/RaenderUndAbstaende/Linienstareke ############################################################
+// ####################################################################################################################
+
+function validateTextRaenderUndAbstaendeLinienstaerke() {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (node.nodeName === 'TABLE'){
+            let tmpCssBorderTop = window.getComputedStyle(node, null).borderTopWidth.replace('px', '')
+            let tmpCssBorderBottom = window.getComputedStyle(node, null).borderBottomWidth.replace('px', '')
+            let tmpCssBorderLeft = window.getComputedStyle(node, null).borderLeftWidth.replace('px', '')
+            let tmpCssBorderRight = window.getComputedStyle(node, null).borderRightWidth.replace('px', '')
+            console.log(tmpCssBorderBottom.parseInt)
+            console.log(tmpCssBorderTop.parseInt)
+            console.log(tmpCssBorderLeft.parseInt)
+            console.log(tmpCssBorderRight.parseInt)
+
+            if (parseInt(tmpCssBorderBottom, 10) < 2  || parseInt(tmpCssBorderTop, 10) < 2 || parseInt(tmpCssBorderLeft, 10) < 2 || parseInt(tmpCssBorderRight, 10) < 2){
+                    node.classList.add("validationMarker"+i);
+                    result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" -> Table-Border:" + "Right: "+tmpCssBorderRight+ ", Left: " +tmpCssBorderLeft+ ", Top: " + tmpCssBorderTop + ", Bottom: " +tmpCssBorderBottom +"</br>";
+                    node.classList.remove("validationMarker"+i);
+                    i++;
+                    break;
+            }
+        }
+
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden zu geringe Tabellen-Ränder erkannt, ggf. die Linienstärke auf 2px erhöhen: </br>" + result + "</div>";
+    }
+}
+
+// ####################################################################################################################
+// ################### Text/RaenderUndAbstaende/Bilder ############################################################
+// ####################################################################################################################
+function validateTextRaenderUndAbstaendeBilder() {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
+        for (let pseudo of ['', ':before', ':after']) {
+            // let text = node.textContent
+            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
+            //     node.classList.add("validationMarker"+i);
+            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
+            //     node.classList.remove("validationMarker"+i);
+            //     i++;
+            //     break;
+            // }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+    }
+}
+
+// ####################################################################################################################
+// ################### Text/RaenderUndAbstaende/Seitenrand ############################################################
+// ####################################################################################################################
+
+function validateTextRaenderUndAbstaendeSeitenrand() {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
+        for (let pseudo of ['', ':before', ':after']) {
+            // let text = node.textContent
+            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
+            //     node.classList.add("validationMarker"+i);
+            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
+            //     node.classList.remove("validationMarker"+i);
+            //     i++;
+            //     break;
+            // }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+    }
+}
+
+// ####################################################################################################################
+// ################### Text/Textanordung/Ausrichtung ##################################################################
+// ####################################################################################################################
+
+function validateTextTextanordungAusrichtung() {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
+        for (let pseudo of ['', ':before', ':after']) {
+            // let text = node.textContent
+            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
+            //     node.classList.add("validationMarker"+i);
+            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
+            //     node.classList.remove("validationMarker"+i);
+            //     i++;
+            //     break;
+            // }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+    }
+}
+
+// ####################################################################################################################
+// ################### Text/Zeilenlänge ###############################################################################
+// ####################################################################################################################
+
+function validateTextZeilelaenge() {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
+        for (let pseudo of ['', ':before', ':after']) {
+            // let text = node.textContent
+            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
+            //     node.classList.add("validationMarker"+i);
+            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
+            //     node.classList.remove("validationMarker"+i);
+            //     i++;
+            //     break;
+            // }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+    }
+}
+
+
+// ####################################################################################################################
+// ################### Zeichen/Hervorhebungen/Links####################################################################
+// ####################################################################################################################
+
+function validateHervorhebungenLinks() {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
+        for (let pseudo of ['', ':before', ':after']) {
+            // let text = node.textContent
+            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
+            //     node.classList.add("validationMarker"+i);
+            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
+            //     node.classList.remove("validationMarker"+i);
+            //     i++;
+            //     break;
+            // }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+    }
+}
+
+// ####################################################################################################################
+// ################### Zeichen/Hervorhebungen/Sparsam#################################################################
+// ####################################################################################################################
+
+function validateHervorhebungenSparsam() {
+    let result = "";
+    var i = 0;
+    for (let node of window.document.body.querySelectorAll('*')) {
+        if (!node.textContent) continue;
+        if (!node.style) continue;
+        if (node.nodeName === 'HTML' || node.nodeName === 'HEAD' || node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE' || node.nodeName === 'TITLE') continue;
+        for (let pseudo of ['', ':before', ':after']) {
+            // let text = node.textContent
+            // if (text.length > 1 && text.trim() && text === text.toUpperCase()){
+            //     node.classList.add("validationMarker"+i);
+            //     result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker"+i)+", "+ node.nodeName +" ->" +text+"</br>";
+            //     node.classList.remove("validationMarker"+i);
+            //     i++;
+            //     break;
+            // }
+        }
+    }
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Es wurden Versalien erkannt, ggf. den Text auf gemischte Groß- und Kleinschreibung setzen: </br>" + result + "</div>";
+    }
 }
 
 // ####################################################################################################################

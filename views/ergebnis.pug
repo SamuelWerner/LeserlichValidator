@@ -22,7 +22,7 @@ body(style='padding-top:56px').bg-light
 
     main.container
         h1.display-3 Validierung abgeschlossen.
-        div.topInfoBox.alert.alert-success Die Auswertung für #{url} ist abgeschlossen. Die folgenden fehlgeschlagenen Validationen dienen lediglich als Anregung und Inspiration für ihre Webanwendung. Nicht immer sind die Vorschläge für Sie sinnvoll, aber manchmal können unsere Vorschläge zu einer deutlich besseren Lesbarkeit ihrer Webanwendung beitragen. Weitere Informationen erhalten Sie unter #[a(href='http://leserlich.info', target='_blnk') http://leserlich.info].
+        div.topInfoBox.alert.alert-success Die Auswertung für #{url} ist abgeschlossen. Die folgenden fehlgeschlagenen Validationen dienen lediglich als #[b Anregung und Inspiration] für ihre Webanwendung. Nicht immer sind die Vorschläge für Sie sinnvoll, aber manchmal können unsere Vorschläge zu einer deutlich besseren Lesbarkeit ihrer Webanwendung beitragen. Weitere Informationen erhalten Sie unter #[a(href='http://leserlich.info', target='_blnk') http://leserlich.info].
         div.my-3.p-3.bg-white.rounded.shadow-sm
             each kategorie in results
                 h2.display-4 #{kategorie.titel}

@@ -475,7 +475,7 @@ function validateTextTextanordungAusrichtung() {
 
         if (tmpCssTxtAlgin && (tmpCssTxtAlgin === 'right' || tmpCssTxtAlgin === 'center' || tmpCssTxtAlgin === 'justify' || tmpCssTxtAlgin === 'end')) {
             node.classList.add("validationMarker" + i);
-            result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker" + i) + ", " + node.nodeName + i + " -> text-align: " + tmpCssTxtAlgin + "-> "+ node.innerText.substring(0, 60) + " [...]</br>";
+            result += "Body-Zeile: " + lineOfCode(window.document.body.innerHTML, "validationMarker") + ", " + node.nodeName + i + " -> text-align: " + tmpCssTxtAlgin + "-> "+ node.innerText.substring(0, 60) + " [...]</br>";
             node.classList.remove("validationMarker" + i);
             i++;
         }
@@ -536,7 +536,6 @@ function validateHervorhebungenLinks() {
     let result = "";
     var i = 0;
     for (let node of window.document.body.querySelectorAll('*')) {
-        console.log('#'+node.nodeName)
         if (!node.textContent) continue;
         if (node.nodeName !== 'LINK'){
             let tmpCssTexDecoration = window.getComputedStyle(node, null).textDecoration

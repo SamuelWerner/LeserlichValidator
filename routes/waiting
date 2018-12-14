@@ -5,7 +5,10 @@ const session = require('express-session');
 router.post('/', function(req, res) {
     let url = addHttp(req.body.url);
     session.validationURL = url.substring(8);
-    session.renderURL = url;
+    let regex = /(http[s]?:\/\/)?([^\/\s]+\/)/g
+    let match = regex.exec(url + '/')
+    session.renderURL = match[0];
+    console.log(session.renderURL)
     res.render('waiting', { title: 'Leserator.de', url: url});
 });
 
@@ -15,7 +18,7 @@ router.get('/', function(req, res) {
 
 function addHttp(url) {
     result = url;
-    if (!/^(f|ht)tp?:\/\//i.test(url)) {
+    if (!/^(f|ht)tps?:\/\//i.test(url)) {
         var result = "https://" + url;
     }
     return result;

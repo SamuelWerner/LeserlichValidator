@@ -14,14 +14,17 @@ html, body {
 }
 
 
-h1{text-align: center;}
+h1{
+    text-align: center;
+    margin-top: 40px;
+}
 button{
     margin: 5px auto;
     display: block;
 }
 
 .topInfoBox {
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 .validationBox  {

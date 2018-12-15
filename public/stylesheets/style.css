@@ -9,7 +9,7 @@ html, body {
     text-align: center;
     width: 40%;
     margin: auto;
-    top: 35%;
+    top: 25%;
     position: relative;
 }
 
@@ -33,7 +33,7 @@ button{
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: white;
+    color: #e6e6e6;
 }
 
 label.unsichtbar {
@@ -43,7 +43,7 @@ label.unsichtbar {
 @media screen and (max-width:992px){
     body{
         font-size: 95%;
-    }
+    }/*
     nav ul{
         text-align: center;
     }
@@ -51,16 +51,25 @@ label.unsichtbar {
          margin-left: 0;
          margin-right: auto;
          padding-bottom: 1em;
-     }
+     }*/
+    .wrapper{
+        width: 60%
+    }
 }
-@media screen and (max-width:800px){
+@media screen and (max-width:768px){
     body{
         font-size: 90%;
     }
+    .wrapper{
+        width: 70%;
+    }
 }
-@media screen and (max-width: 575px){
+@media screen and (max-width: 576px){
     body{
         font-size:80%;
+    }
+    .wrapper{
+        width: 80%;
     }
 }
 
@@ -75,5 +84,8 @@ button{
     padding: 3em!important;
 }
 
+.navbar-brand{
+    padding-top: 0;
+}
 
 

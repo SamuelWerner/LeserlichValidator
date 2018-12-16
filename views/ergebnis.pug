@@ -1,6 +1,7 @@
 
 head
     title Auswertung
+    meta(name='viewport' content='width=600')
     link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
     link(rel='stylesheet' href='/css/style.css')
     script(src='https://code.jquery.com/jquery-3.3.1.js')
@@ -38,3 +39,10 @@ body(style='padding-top:56px').bg-light
                                 div.validationBox !{schritt.ergebnis}
                 hr
 
+    //footer
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+            ul.navbar-nav.mr-auto
+            ul.nav.navbar-nav.navbar-right
+                li.nav-item: a.nav-link(href="/handbuch") Handbuch
+                li.nav-item: a.nav-link(href="/about") Über Uns
+                li.nav-item: a.nav-link(href="/impressum") Impressum

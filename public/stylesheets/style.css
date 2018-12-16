@@ -1,6 +1,4 @@
 html, body {
-    height: 100%;
-    width: 100%;
     font-size: 100%;
 }
 
@@ -41,6 +39,9 @@ label.unsichtbar {
 }
 
 @media screen and (max-width:992px){
+    html{
+        width: 140%;
+    }
     body{
         font-size: 95%;
     }/*

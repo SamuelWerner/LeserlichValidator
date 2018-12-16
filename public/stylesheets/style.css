@@ -42,7 +42,7 @@ label.unsichtbar {
 
 @media screen and (max-width:992px){
     html{
-        width: 140%;
+        width: 100%;
     }
     body{
         font-size: 95%;
@@ -58,6 +58,11 @@ label.unsichtbar {
     .wrapper{
         width: 60%
     }
+
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 }
 @media screen and (max-width:768px){
     body{
@@ -66,6 +71,11 @@ label.unsichtbar {
     .wrapper{
         width: 70%;
     }
+
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 }
 @media screen and (max-width: 576px){
     body{
@@ -73,6 +83,11 @@ label.unsichtbar {
     }
     .wrapper{
         width: 80%;
+    }
+
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
     }
 }
 

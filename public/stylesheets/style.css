@@ -88,6 +88,11 @@ label.unsichtbar {
     .container {
         width: 100% !important;
         max-width: 100% !important;
+        word-break: break-word;
+    }
+
+    .p-3 {
+        padding: 1em!important;
     }
 }
 
@@ -97,10 +102,12 @@ button{
 .mainbutton{
     margin: .5em auto;
 }
-
-.p-3 {
-    padding: 3em!important;
+@media screen and (min-width: 992px){
+    .p-3 {
+        padding: 3em !important;
+    }
 }
+
 
 .navbar-brand{
     padding-top: 0;

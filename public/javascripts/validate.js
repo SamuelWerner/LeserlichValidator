@@ -152,21 +152,34 @@ function validateFarbenMenge(){
             let bgColor = window.getComputedStyle(node, pseudo).backgroundColor;
             let color = window.getComputedStyle(node, pseudo).color;
 
+            if (bgColor.match("rgba")) continue;
             if(bgArray.includes(bgColor))continue;
             bgArray.push(bgColor);
 
+            if (color.match("rgba")) continue;
             if(colorArray.includes(color))continue;
             colorArray.push(color);
+
+            var colorVolume = colorArray.length + bgArray.length;
             break;
+
+
+
+
         }
     }
-    result +=  "Anzahl der verwendeten Hintergrundfarben: " + bgArray.length + "</br>" + "Anzahl der verwendeten Textfarben: " + colorArray.length ;
+    if ( colorVolume < 6)
+        result +=  "Anzahl der verwendeten Hintergrundfarben: " + bgArray.length + "</br>" + "Anzahl der verwendeten Textfarben: " + colorArray.length;
+
+    if (colorVolume > 6)
+        result += "Anzahl der verwendeten Hintergrundfarben: " + bgArray.length + "</br>" + "Anzahl der verwendeten Textfarben: " + colorArray.length;
 
 
-    if (result === ""){
-        return "<div class='alert alert-success'>Keine Werte zum validieren vorhanden.</div>"
+
+    if (colorVolume < 6){
+        return "<div class='alert alert-success'>Validation erfolgreich. Eine übersichtliche Farbauswahl wurde erstellt</div>" + result + "</div>"
     } else {
-        return "<div class='alert alert-warning'>Farben sparsam verwenden und klar voneinander abgrenzen</b>: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Die Farbauswahl ist sehr groß. Bitte auf Übersichtlickeit achten!</b>: </br>" + result + "</div>";
     }
 }
 
@@ -218,15 +231,20 @@ function validateKontrasteEbenen(){
                 if (contrastArray.includes(contrast)) continue;
                 contrastArray.push(contrast);
 
+                if (contrast < 4.5)
+                    result += "Der untersuchte tag: " + node.tagName +  " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist zu niedrig! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." +"</br>" + "</br>";
 
-                result += node + "-> " + " 1. Hintergund in rgb: " + backgroundColor + "</br>" + child + "-> " + "2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " :1" + "</br>" + "</br>";
+                if (contrast > 4.5 && contrast < 7.0)
+                    result += "Der untersuchte tag: " + node.tagName + " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist in Ordnung! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." +"</br>" + "</br>";
 
+                if (contrast > 7.0)
+                    result += "Der untersuchte tag: " + node.tagName +  " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist sehr gut! Sie haben eine gelungene Farbauswahl!" +"</br>" + "</br>";
             }
             break;
         }
     }
     if (result === ""){
-        return "<div class='alert alert-success'>Keine Werte zum validieren vorhanden.</div>"
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
         return "<div class='alert alert-warning'>Folgende Farben wurden validiert</b>: </br>" + result + "</div>";
     }
@@ -239,7 +257,7 @@ function validateKontrasteEbenen(){
 function validateKontrasteHintergrund(){
     result = "";
     var contrastArray = new Array();
-
+    var  i = 0;
     for(let node of window.document.querySelectorAll('*')) {
         for (let pseudo of ['', ':before', ':after']) {
 
@@ -283,13 +301,22 @@ function validateKontrasteHintergrund(){
             if(contrastArray.includes(contrast)) continue;
             contrastArray.push(contrast);
 
-            result +=  node + ":" + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " :1" + "</br>" + "</br>";
+            if(contrast < 4.5)
+                result += "Der untersuchte tag: "+ node.tagName + ": " + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist zu niedrig! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." + "</br>" + "</br>";
+
+            if(contrast > 4.5 && contrast < 7.0)
+                result +=  "Der untersuchte tag: " + node.tagName + ": " + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist in Ordnung! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." + "</br>" + "</br>";
+
+            if (contrast > 7.0)
+                result +=  "Der untersuchte tag: " + node.tagName + ": " + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist sehr gut! Sie haben eine gelungene Farbauswahl!" + "</br>" + "</br>";
+
+
             break;
         }
     }
 
     if (result == ""){
-        return "<div class='alert alert-success'>Keine Werte zum validieren vorhanden.</div>"
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
         return "<div class='alert alert-warning'>Folgende Farben wurden validiert</b>: </br>" + result + "</div>";
     }
@@ -361,7 +388,7 @@ function validateAlternativtext() {
     }
 
     if (result == ""){
-        return "<div class='alert alert-success'>Keine Werte zum validieren vorhanden.</div>"
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
         return "<div class='alert alert-warning'>Folgende Bilder wurden validiert</b>: </br>" + result + "</div>";
     }

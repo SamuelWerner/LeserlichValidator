@@ -52,15 +52,11 @@ body(style='padding-top:56px').bg-light
             strong Farbe
             p Um den Gebrauch von ungünstiger Farbkombination und übermäßigen Einsatz von Farben zu vermeiden, Validiert Leserator unter Berücksichtigung folgender Kriterien:
             ol
-                li Rot-Grün-Kombinationen vermeiden.
-                    p Benutzer die unter einer Rot-Grün-Blindheit leiden, haben Schwierigkeiten den Unterschied zwischen Rot und Grün zu erkennen. Daher ist zu empfehlen, Rot-Grün Kombinationen zu vermeiden. Leserator erkennt die Farben und gibt bei einer fehlgeschlagenen Validation wird eine Handlungsempfehlung ausgegeben.
                 li Farben sparsam einsetzen
                     p Um zu vermeiden das eine Webseite mit Farben überladen wirkt, ist ein sparsamer Einsatz von Farben zu empfehlen. Darüber hinaus sollten Farben klar voneinander abgetrennt sein. Leserator berechnet die Menge der verschiedene Farben und gibt ab einer gewissen Anzahl eine entsprechende Meldung aus.
-                li Semantische Farbkonventionen
-                    p Als semantische Farbkonventionen wird die einheitliche Verwendung bestimmter Farben bezeichnet. Leserator validiert ein bestimmtes Szenario. Der Benutzer prüft, ob das Szenario abweicht.
 
             strong Kontrast
-            p Damit Benutzer mit eingeschränkten Sehfähigkeiten ohne Schwierigkeiten einen Text auf einen Hintergrund lesen kann, ist das beachten auf ausreichenden Kontrast zu empfehlen. Einen Kontrastrechner finden Sie unter
+            p Damit Benutzer mit eingeschränkten Sehfähigkeiten ohne Schwierigkeiten einen Text auf einem Hintergrund lesen können, ist auf ein ausreichendes Kontrastverhältnis zu achten. Einen Kontrastrechner finden Sie unter
                 a(href="http://www.leserlich.info/werkzeuge/kontrastrechner/index.php")  http://www.leserlich.info/werkzeuge/kontrastrechner/index.php.
             p Leserator validiert Kontrast unter Berücksichtigung folgender Kriterien:
             ol
@@ -68,8 +64,8 @@ body(style='padding-top:56px').bg-light
                     p Um die Lesbarkeit zu gewährleisten, muss der Hintergrund über ausreichend Kontrast zum Text verfügen. Leserator erkennt die Farben und berechnet das Kontrastverhältnis. Sollte das Kontrastverhältnis nicht ausreichend sein, wird eine entsprechende Handlungsempfehlung ausgegeben.
                 li Ebenen
                     p Es ist für ein ausreichenden Kontrast zwischen zwei Ebenen zu sorgen. Leserator erkennt die Farben und berechnet das Kontrastverhältnis. Sollte das Kontrastverhältnis nicht ausreichend sein, wird eine entsprechende Handlungsempfehlung ausgegeben.
-                li Bild
-                    p Farblich abgebildete Objekte müssen sich voneinander abheben. Leserator ermittelt den Kontrastwert des gesamten Bildes. Sobald der Kontrastwert als niedrig ermittelt wurde, wird empfohlen den Kontrast des gesamten Bildes zu erhöhen.
+                li Alternativtexte
+                    p Bilder und Grafiken sollen mit beschreibenden Alternativtexten versehen werden, damit Bildinhalte durch Screenreader oder andere assistive Technologien Menschen vermittelt werden können, die den Bildinhalt nicht erkennen. Der Leserator benennt die Bilder ohne Alternativtext.
 
             strong Schrift
             p Benutzer mit Sehschwierigkeiten benutzen häufig zum lesen eines Textes einen Screenreaders oder die Bildschirmlupe. Um einen Qualitätsverlust zu vermeiden und eine Lesbarkeit zu gewährleisten, ist die Wahl der geeigneten Schriftart wichtig. Beachten Sie auch die Wahl der geeignete Schriftgröße für verschiedene Ausgabegeräte. Einen Schriftgrößenrechner finden Sie unter

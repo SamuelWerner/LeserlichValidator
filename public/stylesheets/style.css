@@ -112,5 +112,11 @@ button{
 .navbar-brand{
     padding-top: 0;
 }
-
+.alert-warning {
+    color: #5d4706;
+}
+.auswertungslink{
+    color: black;
+    font-style: italic;
+}
 

@@ -118,6 +118,7 @@ $( document ).ready(function() {
     jsonDataStructure ['Schrift']['inhalt']['TextanordnungLinks']['ergebnis']= validateTextTextanordungAusrichtung();
     jsonDataStructure ['Schrift']['inhalt']['ZeilenlaengeMaximal']['ergebnis']= validateTextZeilelaenge();
     jsonDataStructure ['Schrift']['inhalt']['HervorhebungUnterstreichungLinks']['ergebnis']= validateHervorhebungenLinks();
+
     // Kontrast
     jsonDataStructure['Farben']['inhalt']['Sparsam']['ergebnis']=validateFarbenMenge();
     jsonDataStructure ['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund();
@@ -162,24 +163,20 @@ function validateFarbenMenge(){
 
             var colorVolume = colorArray.length + bgArray.length;
             break;
-
-
-
-
         }
     }
     if ( colorVolume < 6)
         result +=  "Anzahl der verwendeten Hintergrundfarben: " + bgArray.length + "</br>" + "Anzahl der verwendeten Textfarben: " + colorArray.length;
 
     if (colorVolume > 6)
-        result += "Anzahl der verwendeten Hintergrundfarben: " + bgArray.length + "</br>" + "Anzahl der verwendeten Textfarben: " + colorArray.length;
+        result += "Anzahl der verwendeten Hintergrundfarben: " + bgArray.length + "</br>" + "Anzahl der verwendeten Textfarben: " + colorArray.length + "</br>" + "</br>" + "Für eine übersichtliche Farbpalette reichen in der Regel etwa 6 Farben aus! ";
 
 
 
     if (colorVolume < 6){
-        return "<div class='alert alert-success'>Validation erfolgreich. Eine übersichtliche Farbauswahl wurde erstellt</div>" + result + "</div>"
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Die Farbauswahl ist sehr groß. Bitte auf Übersichtlickeit achten!</b>: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Folgende Menge an verschidenen Farben wurde ermittelt</b>: </br>" + result + "</div>";
     }
 }
 
@@ -235,10 +232,10 @@ function validateKontrasteEbenen(){
                     result += "Der untersuchte tag: " + node.tagName +  " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist zu niedrig! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." +"</br>" + "</br>";
 
                 if (contrast > 4.5 && contrast < 7.0)
-                    result += "Der untersuchte tag: " + node.tagName + " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist in Ordnung! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." +"</br>" + "</br>";
+                    result += "Der untersuchte tag: " + node.tagName + " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist in Ordnung! Jedoch bitte beachten, die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." +"</br>" + "</br>";
 
-                if (contrast > 7.0)
-                    result += "Der untersuchte tag: " + node.tagName +  " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist sehr gut! Sie haben eine gelungene Farbauswahl!" +"</br>" + "</br>";
+                //if (contrast > 7.0)
+                    //result += "Der untersuchte tag: " + node.tagName +  " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist sehr gut! Sie haben eine gelungene Farbauswahl!" +"</br>" + "</br>";
             }
             break;
         }
@@ -302,13 +299,13 @@ function validateKontrasteHintergrund(){
             contrastArray.push(contrast);
 
             if(contrast < 4.5)
-                result += "Der untersuchte tag: "+ node.tagName + ": " + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist zu niedrig! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." + "</br>" + "</br>";
+                result += "Der untersuchte tag: "+ node.tagName + " mit class-Name: " + node.className + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist zu niedrig! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." + "</br>" + "</br>";
 
             if(contrast > 4.5 && contrast < 7.0)
-                result +=  "Der untersuchte tag: " + node.tagName + ": " + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist in Ordnung! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." + "</br>" + "</br>";
+                result +=  "Der untersuchte tag: " + node.tagName + " mit class-Name: " + node.className +"</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist in Ordnung! Jedoch bitte beachten, die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." + "</br>" + "</br>";
 
-            if (contrast > 7.0)
-                result +=  "Der untersuchte tag: " + node.tagName + ": " + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist sehr gut! Sie haben eine gelungene Farbauswahl!" + "</br>" + "</br>";
+            //if (contrast > 7.0)
+                //result +=  "Der untersuchte tag: " + node.tagName + ": " + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist sehr gut! Sie haben eine gelungene Farbauswahl!" + "</br>" + "</br>";
 
 
             break;
@@ -379,10 +376,10 @@ function validateAlternativtext() {
     var i = 0;
     for (let node of window.document.querySelectorAll('img')){
 
-        if (!node.alt)
-            node.alt = "Hier befindet sich ein Bild ohne Alternativtext!";
+        if (node.alt) continue;
+
         node.classList.add("validationMarker"+i);
-        result += "Body-Zeile "+ lineOfCode(window.document.body.innerHTML, "validationMarker" +i) + ": " +node.alt + "</br>" + "</br>";
+        result += "Body-Zeile "+ lineOfCode(window.document.body.innerHTML, "validationMarker" +i) + ": " + "Image mit der URL: " + node.src + "</br>" + "</br>";
         node.classList.remove("validationMarker"+i);
         i++;
     }
@@ -390,7 +387,7 @@ function validateAlternativtext() {
     if (result == ""){
         return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
-        return "<div class='alert alert-warning'>Folgende Bilder wurden validiert</b>: </br>" + result + "</div>";
+        return "<div class='alert alert-warning'>Bei folgenden validierten Bildern bitte einen Alternativtext ergänzen</b>: </br>" + result + "</div>";
     }
 }
 // ####################################################################################################################

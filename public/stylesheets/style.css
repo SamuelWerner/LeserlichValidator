@@ -118,5 +118,19 @@ button{
 .auswertungslink{
     color: black;
     font-style: italic;
+    text-decoration: underline;
+}
+p a{
+    text-decoration: underline;
+    color: #343a40;
 }
 
+.btn-primary {
+    color: #343a40;
+    background-color: #bfddff;
+    border-color: #343a40;
+}
+
+.form-control{
+    border: 1px solid #343a40;
+}

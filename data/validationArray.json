@@ -2,29 +2,9 @@
   "Farben": {
     "titel": "Farben",
     "inhalt": {
-      "Rotgruen": {
-        "titel": "Rot-Grün-Kombinationen",
-        "beschreibung": "Rot-Grün-Kombinationen vermeiden.",
-        "ergebnis": ""
-      },
-      "Unterscheidung": {
-        "titel": "Zusätzliches Unterscheidungsmerkmal",
-        "beschreibung": "Zusätzlich zur Farbe ein weiteres Unterscheidungsmerkmal verwenden.",
-        "ergebnis": ""
-      },
       "Sparsam": {
         "titel": "Farben sparsam einsetzen",
         "beschreibung": "Farben sparsam einsetzen und klar voneinander abgrenzen.",
-        "ergebnis": ""
-      },
-      "Komplementaer": {
-        "titel": "Komplementärfarben",
-        "beschreibung": "Kontraste von Komplementärfarben vermeiden.",
-        "ergebnis": ""
-      },
-      "Semantisch": {
-        "titel": "Semantische Farbkonventionen",
-        "beschreibung": "Das Beachten einer einheitlichen Verwendung bestimmter Farben.",
         "ergebnis": ""
       }
     }
@@ -42,14 +22,9 @@
         "beschreibung": "Der Kontrast zwischen zwei Ebenen, die aufeinander liegen.",
         "ergebnis": ""
       },
-      "Bild": {
-        "titel": "Bild",
-        "beschreibung": "Der Kontrast innerhalb eines Bildes. Wie stark hebt sich die wichtige Information vom Hintergrund ab? ",
-        "ergebnis": ""
-      },
-      "BildHintergrund": {
-        "titel": "Bild Hintergrund",
-        "beschreibung": "Den Kontrast von Text auf Bild als Untergrund bewerten. Je unruhiger das Bild desto ungeeigneter als Hintergrund.  ",
+      "Alternativtext": {
+        "titel": "Bild Alternativtext",
+        "beschreibung": "Bilder sollen mit Alternativtexten versehen werden, damit Bildinhalte durch Screenreader oder andere assistive Technologien erkannt werden können.  ",
         "ergebnis": ""
       }
     }

@@ -2,31 +2,11 @@ var jsonDataStructure = {
     "Farben": {
         "titel": "Farben",
         "inhalt": {
-            "Rotgruen": {
-                "titel": "Rot-Grün-Kombinationen",
-                "beschreibung": "Rot-Grün-Kombinationen vermeiden.",
-                "ergebnis": ""
-            },
-            "Unterscheidung": {
-                "titel": "Zusätzliches Unterscheidungsmerkmal",
-                "beschreibung": "Zusätzlich zur Farbe ein weiteres Unterscheidungsmerkmal verwenden.",
-                "ergebnis": ""
-            },
             "Sparsam": {
                 "titel": "Farben sparsam einsetzen",
                 "beschreibung": "Farben sparsam einsetzen und klar voneinander abgrenzen.",
                 "ergebnis": ""
             },
-            "Komplementaer": {
-                "titel": "Komplementärfarben",
-                "beschreibung": "Kontraste von Komplementärfarben vermeiden.",
-                "ergebnis": ""
-            },
-            "Semantisch": {
-                "titel": "Semantische Farbkonventionen",
-                "beschreibung": "Das Beachten einer einheitlichen Verwendung bestimmter Farben.",
-                "ergebnis": ""
-            }
         }
     },
     "Kontrast": {
@@ -42,14 +22,9 @@ var jsonDataStructure = {
                 "beschreibung": "Der Kontrast zwischen zwei Ebenen, die aufeinander liegen.",
                 "ergebnis": ""
             },
-            "Bild": {
-                "titel": "Bild",
-                "beschreibung": "Der Kontrast innerhalb eines Bildes. Wie stark hebt sich die wichtige Information vom Hintergrund ab? ",
-                "ergebnis": ""
-            },
-            "BildHintergrund": {
-                "titel": "Bild Hintergrund",
-                "beschreibung": "Den Kontrast von Text auf Bild als Untergrund bewerten. Je unruhiger das Bild desto ungeeigneter als Hintergrund.  ",
+            "Alternativtext": {
+                "titel": "Bild Alternativtext",
+                "beschreibung": "Bilder sollen mit Alternativtexten versehen werden, damit Bildinhalte durch Screenreader oder andere assistive Technologien erkannt werden können.  ",
                 "ergebnis": ""
             }
         }
@@ -144,8 +119,10 @@ $( document ).ready(function() {
     jsonDataStructure ['Schrift']['inhalt']['ZeilenlaengeMaximal']['ergebnis']= validateTextZeilelaenge();
     jsonDataStructure ['Schrift']['inhalt']['HervorhebungUnterstreichungLinks']['ergebnis']= validateHervorhebungenLinks();
     // Kontrast
+    jsonDataStructure['Farben']['inhalt']['Sparsam']['ergebnis']=validateFarbenMenge();
     jsonDataStructure ['Kontrast']['inhalt']['Hintergrund']['ergebnis']=validateKontrasteHintergrund();
     jsonDataStructure ['Kontrast']['inhalt']['Ebenen']['ergebnis'] =validateKontrasteEbenen();
+    jsonDataStructure ['Kontrast']['inhalt']['Alternativtext']['ergebnis'] = validateAlternativtext();
 
     var url = window.location.protocol + "//" + window.location.host + "/checkResult";
 
@@ -159,165 +136,142 @@ $( document ).ready(function() {
 
 var globalID = 0;
 
+// ####################################################################################################################
+// ############################ Anzahl der Farben ############################################################
+// ####################################################################################################################
+
+function validateFarbenMenge(){
+    result = "";
+
+    var bgArray = new Array();
+    var colorArray = new Array();
+
+    for (let node of window.document.querySelectorAll('*')){
+        for(let pseudo of ['',':before',':after']){
+
+            let bgColor = window.getComputedStyle(node, pseudo).backgroundColor;
+            let color = window.getComputedStyle(node, pseudo).color;
+
+            if (bgColor.match("rgba")) continue;
+            if(bgArray.includes(bgColor))continue;
+            bgArray.push(bgColor);
+
+            if (color.match("rgba")) continue;
+            if(colorArray.includes(color))continue;
+            colorArray.push(color);
+
+            var colorVolume = colorArray.length + bgArray.length;
+            break;
+
+
+
+
+        }
+    }
+    if ( colorVolume < 6)
+        result +=  "Anzahl der verwendeten Hintergrundfarben: " + bgArray.length + "</br>" + "Anzahl der verwendeten Textfarben: " + colorArray.length;
+
+    if (colorVolume > 6)
+        result += "Anzahl der verwendeten Hintergrundfarben: " + bgArray.length + "</br>" + "Anzahl der verwendeten Textfarben: " + colorArray.length;
+
+
+
+    if (colorVolume < 6){
+        return "<div class='alert alert-success'>Validation erfolgreich. Eine übersichtliche Farbauswahl wurde erstellt</div>" + result + "</div>"
+    } else {
+        return "<div class='alert alert-warning'>Die Farbauswahl ist sehr groß. Bitte auf Übersichtlickeit achten!</b>: </br>" + result + "</div>";
+    }
+}
+
 
 // ####################################################################################################################
-// ################## Konstrast Ebenen ############################################################################
+// ################## Kontrast Ebenen ############################################################################
 // ####################################################################################################################
 
 function validateKontrasteEbenen(){
     result = "";
 
-    var relLuBackgroundArray = new Array();
-    var relLuColorArray = new Array();
-
-    var backgroundColorArray = new Array();
-    var textColorArray = new Array();
-
     var contrastArray = new Array();
 
     for(var node of window.document.querySelectorAll('*')) {
-        for (let pseudo of ['', ':befor', ':after']) {
-
+        for (let pseudo of ['', ':before', ':after']) {
 
             let backgroundColor = window.getComputedStyle(node, pseudo).backgroundColor;
-            let color = window.getComputedStyle(node, pseudo).color;
+            var childElements = node.children;
 
-            if (backgroundColor.length != "") {
-                backgroundColor = backgroundColor.substr(4);
-                backgroundColor = backgroundColor.slice(0, -1);
-                var backgroundSplit = backgroundColor.split(",");
+            if (backgroundColor == "rgba(0, 0, 0, 0)") continue;
+            backgroundColor = backgroundColor.substr(4);
+            backgroundColor = backgroundColor.slice(0, -1);
+            var backgroundSplit = backgroundColor.split(",");
 
-                var bgValueR = parseInt(backgroundSplit[0]);
-                var bgValueG = parseInt(backgroundSplit[1]);
-                var bgValueB = parseInt(backgroundSplit[2]);
+            var bgValueR = parseInt(backgroundSplit[0]);
+            var bgValueG = parseInt(backgroundSplit[1]);
+            var bgValueB = parseInt(backgroundSplit[2]);
 
-                var relLumiBackgroundC = RelativeLuminance(bgValueR, bgValueG, bgValueB);
+            var relLumiBackgroundC = RelativeLuminance(bgValueR, bgValueG, bgValueB);
 
-                relLuBackgroundArray.push(relLumiBackgroundC);
-                backgroundColorArray.push(backgroundColor);
+            for (let child of childElements) {
+                var childBg = window.getComputedStyle(child, null).backgroundColor;
 
+                if (childBg == "rgba(0, 0, 0, 0)") continue;
+                if (backgroundColor === childBg) continue;
+
+                childBg = childBg.substr(4);
+                childBg = childBg.slice(0, -1);
+                var childBgSplit = childBg.split(",");
+
+                var childValueR = parseInt(childBgSplit[0]);
+                var childValueG = parseInt(childBgSplit[1]);
+                var childValueB = parseInt(childBgSplit[2]);
+
+                var relLumiChildBg = RelativeLuminance(childValueR, childValueG, childValueB);
+                var contrast = contrastRelation(relLumiBackgroundC, relLumiChildBg);
+
+                if (contrast === 1) continue;
+                if (contrastArray.includes(contrast)) continue;
+                contrastArray.push(contrast);
+
+                if (contrast < 4.5)
+                    result += "Der untersuchte tag: " + node.tagName +  " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist zu niedrig! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." +"</br>" + "</br>";
+
+                if (contrast > 4.5 && contrast < 7.0)
+                    result += "Der untersuchte tag: " + node.tagName + " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist in Ordnung! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." +"</br>" + "</br>";
+
+                if (contrast > 7.0)
+                    result += "Der untersuchte tag: " + node.tagName +  " 1. Hintergund in rgb: " + backgroundColor + "</br>" + "Der untersuchte child tag: " + child.tagName + " 2. Hintergrund in rgb: " + childBg + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" +"Das Kontrastverhältnis ist sehr gut! Sie haben eine gelungene Farbauswahl!" +"</br>" + "</br>";
             }
-            if (color.length != ""){
-                color = color.substr(4);
-                color = color.slice(0, -1);
-                var colorSplit = color.split(",");
-
-                var cValueR = parseInt(colorSplit[0]);
-                var cValueG = parseInt(colorSplit[1]);
-                var cValueB = parseInt(colorSplit[2]);
-
-                var relLumiTextColor = RelativeLuminance(cValueR, cValueG, cValueB);
-
-                relLuColorArray.push(relLumiTextColor);
-                textColorArray.push(color);
-            }
-
-            //  var tags = node.textContent;
-            // var parentTags = node.parentNode.textContent;
-
-            //result +=  node + " -> " + "Hintergrund: " + backgroundColor + "</br>" + node + "Textfarbe: " + color + "</br>" + "Kontrast: "+ contrast + "</br>" + "</br>";
             break;
-
         }
     }
-
-    for ( let i = 0; i < relLuBackgroundArray.length; i++){
-        for (let j = 0; j < relLuBackgroundArray.length; j++) {
-
-            var contrast = contrastRelation(relLuBackgroundArray[i], relLuBackgroundArray[j]);
-            if (isNaN(contrast))
-                continue;
-            if (contrastArray.includes(contrast))
-                continue;
-            contrastArray.push(contrast);
-
-
-            result +=  "Hintergrund Nr. 1: " + backgroundColorArray[i] + "</br>" + "Hintergrund Nr. 2: " + backgroundColorArray[j] + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "</br>";
-
-        }
-
-    }
-
-
-    if (result == ""){
-        return "<div class='alert alert-success'>Keine Werte zum validieren vorhanden.</div>"
+    if (result === ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
         return "<div class='alert alert-warning'>Folgende Farben wurden validiert</b>: </br>" + result + "</div>";
     }
 }
 
-
-
-function RelativeLuminance(r,g,b){
-    var rNormalisiert = r/255; // 255 is the top color value equal to 1 for der lightest color value
-    var gNormalisiert = g/255;
-    var bNormalisiert = b/255;
-
-    if (rNormalisiert <= 0.03928){
-        var rNext = rNormalisiert/12.92;
-    }
-    else
-        var rNext = Math.pow(((rNormalisiert+0.055)/1.055),2.4);
-
-    if (gNormalisiert <= 0.03928){
-        var gNext = gNormalisiert/12.92;
-    }
-    else gNext = Math.pow(((gNormalisiert+0.055)/1.055),2.4);
-
-    if (bNormalisiert <= 0.03928){
-        var bNext = bNormalisiert/12.92;
-    }
-    else bNext = Math.pow(((bNormalisiert+0.055)/1.055),2.4);
-
-    var relativeLuminance = 0.2126 * rNext + 0.7152 * gNext + 0.0722 * bNext;
-
-    return relativeLuminance;
-}
-
-
-function contrastRelation(background, color){
-    var y1;
-    var y2;
-
-    if (background < color){
-        y1 = color ;
-        y2 = background;
-    }
-    else {
-        y1 = background;
-        y2 = color;
-    }
-
-    var contrastRelation = (y1 + 0.05)/(y2 + 0.05);
-
-    return contrastRelation;
-
-}
 // ####################################################################################################################
 // ################## Konstrast Hintergrund ############################################################################
 // ####################################################################################################################
 
 function validateKontrasteHintergrund(){
     result = "";
-    var bool = false;
-
-    var relLuBackgroundArray = new Array();
-    var relLuColorArray = new Array();
-
-    var backgroundColorArray = new Array();
-    var textColorArray = new Array();
-
     var contrastArray = new Array();
-
-    for(var node of window.document.querySelectorAll('*')) {
-        for (let pseudo of ['', ':befor', ':after']) {
+    var  i = 0;
+    for(let node of window.document.querySelectorAll('*')) {
+        for (let pseudo of ['', ':before', ':after']) {
 
 
             let backgroundColor = window.getComputedStyle(node, pseudo).backgroundColor;
             let color = window.getComputedStyle(node, pseudo).color;
 
-            if (backgroundColor.length != "") {
-                backgroundColor = backgroundColor.substr(4);
+            if (backgroundColor === "rgba(0, 0, 0, 0)") continue;
+            if (backgroundColor.match("rgba")) continue;
+            if (color === "rgba(0, 0, 0, 0)") continue;
+            if (color.match("rgba")) continue;
+
+            if (backgroundColor.length != "")
+                backgroundColor = backgroundColor.substr(4);{
                 backgroundColor = backgroundColor.slice(0, -1);
                 var backgroundSplit = backgroundColor.split(",");
 
@@ -327,8 +281,6 @@ function validateKontrasteHintergrund(){
 
                 var relLumiBackgroundC = RelativeLuminance(bgValueR, bgValueG, bgValueB);
 
-                relLuBackgroundArray.push(relLumiBackgroundC);
-                backgroundColorArray.push(backgroundColor);
 
             }
             if (color.length != ""){
@@ -342,47 +294,42 @@ function validateKontrasteHintergrund(){
 
                 var relLumiTextColor = RelativeLuminance(cValueR, cValueG, cValueB);
 
-                relLuColorArray.push(relLumiTextColor);
-                textColorArray.push(color);
             }
 
-            //  var tags = node.textContent;
-            // var parentTags = node.parentNode.textContent;
+            let contrast = contrastRelation(relLumiBackgroundC,relLumiTextColor);
+            if (contrast === 1) continue;
+            if(contrastArray.includes(contrast)) continue;
+            contrastArray.push(contrast);
 
-            //result +=  node + " -> " + "Hintergrund: " + backgroundColor + "</br>" + node + "Textfarbe: " + color + "</br>" + "Kontrast: "+ contrast + "</br>" + "</br>";
+            if(contrast < 4.5)
+                result += "Der untersuchte tag: "+ node.tagName + ": " + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist zu niedrig! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." + "</br>" + "</br>";
+
+            if(contrast > 4.5 && contrast < 7.0)
+                result +=  "Der untersuchte tag: " + node.tagName + ": " + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist in Ordnung! Die Untergrenze für das Kontrastverhältnis liegt bei 4,5 : 1." + "</br>" + "</br>";
+
+            if (contrast > 7.0)
+                result +=  "Der untersuchte tag: " + node.tagName + ": " + "</br>" + "Hintergrund in rgb: " + backgroundColor + "</br>" + "Textfarbe in rgb: " + color + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "Das Kontrastverhältnis ist sehr gut! Sie haben eine gelungene Farbauswahl!" + "</br>" + "</br>";
+
+
             break;
         }
     }
 
-    for ( let i = 0; i < relLuBackgroundArray.length; i++){
-        for (let j = 0; j < relLuColorArray.length; j++) {
-
-            var contrast = contrastRelation(relLuBackgroundArray[i], relLuColorArray[j]);
-            if (isNaN(contrast))
-                continue;
-            if (contrastArray.includes(contrast))
-                continue;
-            contrastArray.push(contrast);
-
-
-            result +=  "Hintergrund: " + backgroundColorArray[i] + "</br>" + "Textfarbe: " + textColorArray[j] + "</br>" + "Kontrastverhältnis: " + contrast.toFixed(1) + " : 1" + "</br>" + "</br>";
-
-        }
-
-    }
     if (result == ""){
-        return "<div class='alert alert-success'>Keine Werte zum validieren vorhanden.</div>"
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
     } else {
         return "<div class='alert alert-warning'>Folgende Farben wurden validiert</b>: </br>" + result + "</div>";
     }
 }
 
-
+//#####################################################################################################################
+//#################### Kontrast Rechner ###########################################################################
+//#####################################################################################################################
 
 function RelativeLuminance(r,g,b){
-    var rNormalisiert = r/255; // 255 is the top color value equal to 1 for der lightest color value
-    var gNormalisiert = g/255;
-    var bNormalisiert = b/255;
+    let rNormalisiert = r/255; // 255 is the top color value equal to 1 for der lightest color value
+    let gNormalisiert = g/255;
+    let bNormalisiert = b/255;
 
     if (rNormalisiert <= 0.03928){
         var rNext = rNormalisiert/12.92;
@@ -406,25 +353,46 @@ function RelativeLuminance(r,g,b){
 }
 
 
-function contrastRelation(background, color){
-    var y1;
-    var y2;
+function contrastRelation(firstColor, secondColor){
+    let y1;
+    let y2;
 
-    if (background < color){
-        y1 = color ;
-        y2 = background;
+    if (firstColor < secondColor){
+        y1 = secondColor ;
+        y2 = firstColor;
     }
     else {
-        y1 = background;
-        y2 = color;
+        y1 = firstColor;
+        y2 = secondColor;
     }
-
-    var contrastRelation = (y1 + 0.05)/(y2 + 0.05);
-
+    let contrastRelation = (y1 + 0.05)/(y2 + 0.05);
     return contrastRelation;
 
 }
 
+// ####################################################################################################################
+// ######################### Bild Alternativtext ##################################################################
+// ####################################################################################################################
+
+function validateAlternativtext() {
+    result = "";
+    var i = 0;
+    for (let node of window.document.querySelectorAll('img')){
+
+        if (!node.alt)
+            node.alt = "Hier befindet sich ein Bild ohne Alternativtext!";
+        node.classList.add("validationMarker"+i);
+        result += "Body-Zeile "+ lineOfCode(window.document.body.innerHTML, "validationMarker" +i) + ": " +node.alt + "</br>" + "</br>";
+        node.classList.remove("validationMarker"+i);
+        i++;
+    }
+
+    if (result == ""){
+        return "<div class='alert alert-success'>Validation erfolgreich.</div>"
+    } else {
+        return "<div class='alert alert-warning'>Folgende Bilder wurden validiert</b>: </br>" + result + "</div>";
+    }
+}
 // ####################################################################################################################
 // ################### Text/RaenderUndAbstaende/Linienstareke ############################################################
 // ####################################################################################################################

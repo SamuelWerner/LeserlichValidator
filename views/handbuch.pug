@@ -25,7 +25,83 @@ body(style='padding-top:56px').bg-light
     main.container
         div.my-3.p-3.bg-white.rounded.shadow-sm
             h2 Handbuch
-            p Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            p Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
+            h3  Einleitung
+            p Der Begriff „Barrierefreiheit“ kommt ursprünglich aus dem Bauwesen und wird als Bezeichnung für eine Barrierefreie Gestaltung von Gebäuden verwendet, um älteren Menschen oder Menschen, die in ihrer Bewegungsfähigkeit eingeschränkt sind, den Zugang ohne fremde Hilfe zu erleichtern. Das bedeutet, dass die allgemein üblichen Zugänge so gestaltet werden, dass die von den genannte Personengruppen bequem verwendet werden können, ohne das zwangsweise besondere Zugänge geschaffen werden müssen.
+            p Neben der Barrierefreiheit aus dem Bauwesen, gibt es die Barrierefreiheit im Internet, womit sich der Leserator beschäftigt. Ein barrierefreies Webdesign ermöglicht Menschen mit unterschiedlichen Sehbehinderungen, im fortgeschrittenen Alter oder sonstigen körperlichen Einschränkungen, das Wahrnehmen von Webseiten. Es bringt nicht nur den Vorteil das bestimmte Personengruppen nicht ausgegrenzt werden, sondern auch aus Sicht der Anbieter solcher Webanwendungen, dass eine höhere Reichweite bzw. ein erweiterter Kundenkreis erreicht werden kann.
+            p Leserator bezieht seine Informationen zur Validierung von leserlich.info. Leserlich ist eine Webseite die vom Deutschen Blinden- und Sehbehindertenverbandes (DBSV) entwickelt wurde und dient als Arbeitshilfe für Designer und Webentwickler. Die Seite befasst sich mit verschiedenen Arten des Kommunikationsdesign für Menschen mit und ohne Sehbehinderung. Zusätzlich enthält leserlich.info Tools, wie Schriftgrößenrechner und Kontrastrechner, zum berechnen geeigneter Schrift- und Kontrastverhältnisse.
+            p Für weitere Informationen klicken Sie auf
+                a(href="http://www.leserlich.info/")  http://www.leserlich.info/.
+
+            h3 Validierung
+            h4 Definition
+            p Eine Validierung ist eine Art Beweisführung, dass eine Software bzw. eine Webseite den angegebenen Richtlinien entsprechen. Leserator hält sich an die von leserlich.info aufgeführten Richtlinien.
+            p Für weitere Informationen klicken Sie auf
+                a(href="http://www.leserlich.info/hintergruende/quellen.php")  http://www.leserlich.info/hintergruende/quellen.php.
+            h4 Benutzeroberfläche
+            strong Startseite
+            p Auf der Startseite befindet sich ein Eingabefeld mit den dazugehörigen Button “Validieren”.
+            p In der Kopfzeile finden Sie Links zu den verschiedenen Unterseiten Handbuch, Über uns und Impressum.
+            p Um den Validator zu nutzen, geben Sie die zu prüfende URL Adresse in das oben erwähnte Eingabefeld ein und klicken Sie anschließend auf den Button „Validieren“.
+            p Durch das betätigen des Buttons, werden Sie zu einer weiteren Seite geleitet auf der Sie gebeten werden zu warten. Diese Seite wird Ihnen angezeigt, bis die Validierung abgeschlossen ist.
+            strong Auswertungsseite
+            p Sobald die Validierung beendet ist, werden Sie zu der Auswertungsseite weitergeleitet. Die Auswertungsseite dient dazu Ihnen zu zeigen, ob die Validierung erfolgreich war. Sollten einige Punkte nicht den Vorgaben entsprechen, wird Ihnen eine Liste angezeigt mit den entsprechenden Punkten, sowie eine Handlungsempfehlung.
+            p In der Kopfzeile finden Sie die Navigation von der Startseite wieder. Zusätzlich enthält die Navigation ein weiteres Eingabefeld um eine weitere zu prüfende URL Adresse einzugeben.
+
+            h4 Validierung Punkte
+
+            strong Farbe
+            p Um den Gebrauch von ungünstiger Farbkombination und übermäßigen Einsatz von Farben zu vermeiden, Validiert Leserator unter Berücksichtigung folgender Kriterien:
+            ol
+                li Farben sparsam einsetzen
+                    p Um zu vermeiden das eine Webseite mit Farben überladen wirkt, ist ein sparsamer Einsatz von Farben zu empfehlen. Darüber hinaus sollten Farben klar voneinander abgetrennt sein. Leserator berechnet die Menge der verschiedene Farben und gibt ab einer gewissen Anzahl eine entsprechende Meldung aus.
+
+            strong Kontrast
+            p Damit Benutzer mit eingeschränkten Sehfähigkeiten ohne Schwierigkeiten einen Text auf einem Hintergrund lesen können, ist auf ein ausreichendes Kontrastverhältnis zu achten. Einen Kontrastrechner finden Sie unter
+                a(href="http://www.leserlich.info/werkzeuge/kontrastrechner/index.php")  http://www.leserlich.info/werkzeuge/kontrastrechner/index.php.
+            p Leserator validiert Kontrast unter Berücksichtigung folgender Kriterien:
+            ol
+                li Hintergrund
+                    p Um die Lesbarkeit zu gewährleisten, muss der Hintergrund über ausreichend Kontrast zum Text verfügen. Leserator erkennt die Farben und berechnet das Kontrastverhältnis. Sollte das Kontrastverhältnis nicht ausreichend sein, wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Ebenen
+                    p Es ist für ein ausreichenden Kontrast zwischen zwei Ebenen zu sorgen. Leserator erkennt die Farben und berechnet das Kontrastverhältnis. Sollte das Kontrastverhältnis nicht ausreichend sein, wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Alternativtexte
+                    p Bilder und Grafiken sollen mit beschreibenden Alternativtexten versehen werden, damit Bildinhalte durch Screenreader oder andere assistive Technologien Menschen vermittelt werden können, die den Bildinhalt nicht erkennen. Der Leserator benennt die Bilder ohne Alternativtext.
+
+            strong Schrift
+            p Benutzer mit Sehschwierigkeiten benutzen häufig zum lesen eines Textes einen Screenreader oder die Bildschirmlupe. Um einen Qualitätsverlust zu vermeiden und eine Lesbarkeit zu gewährleisten, ist die Wahl der geeigneten Schriftart wichtig. Beachten Sie auch die Wahl der geeignete Schriftgröße für verschiedene Ausgabegeräte. Einen Schriftgrößenrechner finden Sie unter
+                a(href="http://www.leserlich.info/werkzeuge/schriftgroessenrechner/index.php")  http://www.leserlich.info/werkzeuge/schriftgroessenrechner/index.php.
+            p Leserator validiert Schrift unter Berücksichtigung folgender Kriterien:
+            ol
+                li Zeichen/Schriftart/Humanistische Groteskschriften
+                    p Humanistische Groteskschriften (auch dynamische Sans Serif) ist eine Schriftart ohne Serifen und daher für Leser mit einer Sehbehinderung leichter zu erkennen. Leserator erkennt die Schriftarten und bei einer fehlgeschlagenen Validierung wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Zeichen/Schriftart/Klassizistische Groteskschriften
+                    p Aufgrund der geschlossenen Buchstabenform sind Klassizistische Groteskschriften, wie Arial oder Helvetica nicht zu empfehlen. Leserator erkennt die Schriftarten und bei einer fehlgeschlagenen Validierung wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Zeichen/Schriftart/Serifenschriften
+                    p Sollte eine Serifenschriftart gewünscht sein, ist zu empfehlen Groteskschriften mit einem dynamischen Formprinzip zu wählen. Dynamische Formprinzipien charakterisieren sich durch ihre offeneren Buchstabenform und dem geringeren Strichstärkenkontrast aus. Leserator erkennt die Schriftarten und bei einer fehlgeschlagenen Validierung wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Zeichen/Schriftart/Klassizistische Antiquaschriften
+                    p Klassizistische Antiquaschriften zeichnen sich durch ihren hohen Kontrast zwischen den Grund- und Haarstrichen aus. Unter gewissen Umständen (z.b. schwachen Hintergrundkontrast, geringerer Bildschirmauflösung) können die feinen Linien nicht mehr wahrgenommen werden. Leserator erkennt die Schriftarten und bei einer fehlgeschlagenen Validierung wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Zeichen/Schriftart/Ligaturen
+                    p Die Verschmelzung zweier oder mehrerer Buchstaben wird als Ligatur bezeichnet. Ligaturen können in manchen Fällen schwer erkennbar sein und sollten daher mit Bedacht gesetzt werden. Leserator erkennt die Schriftarten und bei einer fehlgeschlagenen Validierung wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Zeichen/Strichstärke/Strichstärke Regular
+                    p Signalationstexte (Texte die in unterschiedlichen Umgebungssituationen lesbar sein müssen), benötigen die höchsten Anforderungen um Lesbarkeit zu gewährleisten. Daher werden zum Beispiel Groteskschriften mit der Schriftstärke Regular (je nach Font auch Normal, Book, Roman, Text) empfohlen, da sie einen niedrigen Schriftstärkenkontrast aufweisen. Leserator erkennt die richtige Schriftstärke und bei einer fehlgeschlagenen Validierung wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Zeichen/Schriftweite/Normale Schriftweiten
+                    p Unter Schriftweiten wird der Abstand der Buchstaben, Ziffern bzw. Satzzeichen zueinander verstanden. Bei verwendung einer schmalen Schriftweite erschwert man den Leser das lesen durch kleineren Punzen (nicht gedruckte Innenfläche eines Buchstabens). Wurde eine breite Schriftweite gewählt, wird eine größere Ausdehnung benötigt, wodurch die Gefahr entstehen kann, das wärend des Lesens weniger Buchstaben erfasst werden können. Daher empfiehlt sich eine normale Schriftweite. Leserator überprüft ob die Schriftweite den Vorgaben entspricht und bei einer fehlgeschlagenen Validierung wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Zeichen/Zeichenbezogene Empfehlung/Zeichenabstand
+                    p Es empfiehlt sich für Lesetext einen Zeichenabstand von mindestens ⅓ der Mittellänge zu verweden, da ein zu großer Zeichenabstand die Lesbarkeit stört. Fonts, die über sinnvollen Zeichenabstand verfügen, sollen unverändert bleiben. Leserator erkennt die Schriftarten und bei einer fehlgeschlagenen Validierung wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Zeichen/Schreibweise/Versalien
+                    p Versalien ist ein Begriff aus der Typografie und wird als Fachausdruck für Großbuchstaben verwendet. Versalschreibung bedeutet das Wörter nur in GROßBUCHSTABEN geschrieben werden. Diese Art von Hervorhebungen sollte vermieden werden, da das Erkennen von Zeichen erschwert wird. Leserator überprüft die Seite auf Versalien und bei einer fehlgeschlagenen Validierung wird eine entsprechende Handlungsempfehlung ausgegeben.
+                li Zeichen/Hervorhebung/Links
+                    p Unterstreichungen sollten im Text vermieden werden, da das Erkennen der Zeichen erschwert wird. Links sind von dieser Regel ausgeschlossen und sollten mit ausreichend Abstand zur Grundlinie durch Unterstreichung gekennzeichnet werden. Leserator untersucht Texte auf Unterstreichungen. Sobald ein Unterstrichener Text kein Link ist, wird eine Fehlermeldung ausgegeben.
+                li Text/Zeilenlänge/Zeilenlänge
+                    p Je nach Textart sollte auf eine ausreichende Zeilenlänge geachtet werden. Um den Leser nicht vor langen Zeilen abschrecken zu lassen und um die Gefahr zu vermeiden, das bei kurzen Zeilen es zu Worttrennungen kommt, empfiehlt sich eine Zeilenlänge zwischen 35 und 80 Zeichen. Leserator überprüft den Abstand des Lesetextes und gibt bei einer überschreitung der maximalen 80 Zeichen je Zeile,  eine Meldung aus.
+                li Text/Textanordnung/Ausrichtung
+                    p Anstatt einen Blocksatz zu verwenden, empfiehlt siche in linksbündiger Flattersatz, da es bei einem Blocksatz häufig zu unregelmäßigen Wortzwischenräume kommt. Leserator überprüft die Satzform. Sobald ein Blocksatz erkannt wird, wird eine entsprechende Meldung angezeigt.
+                li Text/Ränder und Abstände/Linienstärke
+                    p Bei verwendung mehrerer Textspalten im linksbündigen Flattersatz, haben sich Trennlinien als hilfreich erwiesen für Lesern mit einer Sehbehinderung. Diese Trennlinien, sowie die Linienstärke von Tabellen, sollten mindestens 1 Pica-Punkt bzw. 2 Pixel betragen. Leserator erkennt die Linienstärke und bei einer fehlgeschlagenen Validierung wird eine entsprechende Handlungsempfehlung ausgegeben.
+
+
+
+
+
 
 
